@@ -10,7 +10,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f2f2f2;
+      background-color: #ffffff;
     }
 
     .container {
@@ -76,6 +76,17 @@
       background-color: #f2f2f2;
     }
 
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px; /* Altura suficiente para centralizar verticalmente */
+    }
+
+    .loading {
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 10px;
@@ -115,7 +126,7 @@
         var dadosCSV = []; // Array para armazenar os dados da planilha CSV
   
         // Show loading indicator
-        $("#resultados").html("<div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div>");
+        $("#resultados").html("<div class='loading-container'><div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div></div>");
   
         // Atraso de 1,5 segundos antes de exibir a tabela
         setTimeout(function() {
@@ -153,7 +164,7 @@
               $("#resultados").html(resultadosHTML);
             }
           });
-        }, 1500); // Tempo em milissegundos
+        }, 900); // Tempo em milissegundos
       });
     });
 

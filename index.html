@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procura de Pessoas Abrigadas no RS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    #pesquisa {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    #campo-pesquisa {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 70%;
+    }
+
+    #botao-pesquisar {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    #resultados {
+      margin-top: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #f2f2f2;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      #campo-pesquisa {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Procura de Pessoas Abrigadas no RS</h1>
+
+    <div id="pesquisa">
+      <input type="text" id="campo-pesquisa" placeholder="Nome da pessoa">
+      <button id="botao-pesquisar">Pesquisar</button>
+    </div>
+
+    <div id="resultados"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $("#botao-pesquisar").click(function() {
+        var nomePesquisado = $("#campo-pesquisa").val().toLowerCase();
+        var dadosCSV = []; // Array para armazenar os dados da planilha CSV
+   
+        // Carregar dados da planilha CSV (usando AJAX ou outra biblioteca de requisição)
+        $.ajax({
+          url: "data/abrigados.csv", // Substitua por link da sua planilha CSV
+          dataType: "text",
+          success: function(data) {
+            var linhas = data.split("\n");
+            for (var i = 1; i < linhas.length; i++) { // Ignorar a primeira linha (cabeçalho)
+              var dadosLinha = linhas[i].split(","); // Separar dados por vírgula
+              dadosCSV.push(dadosLinha);
+            }
+   
+            // Filtrar dados por nome
+            var resultados = dadosCSV.filter(function(linha) {
+              return linha[0].toLowerCase().includes(nomePesquisado); // Buscar por nome na primeira coluna
+            });
+   
+            // Exibir resultados em uma tabela
+            var resultadosHTML = "<table>";
+            resultadosHTML += "<tr><th>Nome</th><th>Bairro</th><th>Abrigo</th></tr>";
+            for (var i = 0; i < resultados.length; i++) {
+              resultadosHTML += "<tr>";
+              resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
+              resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
+              resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
+              resultadosHTML += "</tr>";
+            }
+            resultadosHTML += "</table>";
+   
+            $("#resultados").html(resultadosHTML);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

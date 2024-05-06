@@ -164,13 +164,13 @@
     
               // Exibir resultados em uma tabela
               var resultadosHTML = "<table>";
-              resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th></tr>";
+              resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th><th onclick='sortTable(3)'>Cidade</th></tr>";
               for (var i = 0; i < resultados.length; i++) {
                 resultadosHTML += "<tr>";
                 resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
                 resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
                 resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
-                resultadosHTML += "<td>" + resultados[i][3] + "</td>"; // Cidade
+                resultadosHTML += "<td>" + resultados[i][4] + "</td>"; // Cidade
                 resultadosHTML += "</tr>";
               }
               resultadosHTML += "</table>";

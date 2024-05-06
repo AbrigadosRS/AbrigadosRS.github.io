@@ -97,26 +97,40 @@
 
   <script>
     $(document).ready(function() {
+      // Handle search on Enter key press
+      $("#campo-pesquisa").keypress(function(event) {
+        if (event.which === 13) {
+          event.preventDefault(); // Prevent default form submission
+          $("#botao-pesquisar").click(); // Trigger search button click
+        }
+      });
+  
       $("#botao-pesquisar").click(function() {
         var nomePesquisado = $("#campo-pesquisa").val().toLowerCase();
         var dadosCSV = []; // Array para armazenar os dados da planilha CSV
-   
+  
+        // Show loading indicator
+        $("#resultados").html("<div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div>");
+  
         // Carregar dados da planilha CSV (usando AJAX ou outra biblioteca de requisição)
         $.ajax({
           url: "data/abrigados.csv", // Substitua por link da sua planilha CSV
           dataType: "text",
           success: function(data) {
             var linhas = data.split("\n");
-            for (var i = 1; i < linhas.length; i++) { // Ignorar a primeira linha (cabeçalho)
+            for (var i = 1; i < linhas.length; i++) {
               var dadosLinha = linhas[i].split(","); // Separar dados por vírgula
               dadosCSV.push(dadosLinha);
             }
-   
+  
             // Filtrar dados por nome
             var resultados = dadosCSV.filter(function(linha) {
               return linha[0].toLowerCase().includes(nomePesquisado); // Buscar por nome na primeira coluna
             });
-   
+  
+            // Hide loading indicator
+            $("#resultados").html("");
+  
             // Exibir resultados em uma tabela
             var resultadosHTML = "<table>";
             resultadosHTML += "<tr><th>Nome</th><th>Bairro</th><th>Abrigo</th></tr>";
@@ -125,10 +139,9 @@
               resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
               resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
               resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
-              resultadosHTML += "</tr>";
             }
             resultadosHTML += "</table>";
-   
+  
             $("#resultados").html(resultadosHTML);
           }
         });

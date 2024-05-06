@@ -43,7 +43,7 @@
       padding: 1rem;
       border: 1px solid #ccc;
       font-size: 1rem;
-      width: 70%;
+      width: calc(70% - 10px); /* Ajuste para compensar a largura do botão de pesquisa */
       border-radius: 5px 0 0 5px;
     }
 
@@ -117,39 +117,43 @@
         // Show loading indicator
         $("#resultados").html("<div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div>");
   
-        // Carregar dados da planilha CSV (usando AJAX ou outra biblioteca de requisição)
-        $.ajax({
-          url: "data/abrigados.csv", // Substitua por link da sua planilha CSV
-          dataType: "text",
-          success: function(data) {
-            var linhas = data.split("\n");
-            for (var i = 1; i < linhas.length; i++) {
-              var dadosLinha = linhas[i].split(","); // Separar dados por vírgula
-              dadosCSV.push(dadosLinha);
+        // Atraso de 1,5 segundos antes de exibir a tabela
+        setTimeout(function() {
+          // Carregar dados da planilha CSV (usando AJAX ou outra biblioteca de requisição)
+          $.ajax({
+            url: "data/abrigados.csv", // Substitua por link da sua planilha CSV
+            dataType: "text",
+            success: function(data) {
+              var linhas = data.split("\n");
+              for (var i = 1; i < linhas.length; i++) {
+                var dadosLinha = linhas[i].split(","); // Separar dados por vírgula
+                dadosCSV.push(dadosLinha);
+              }
+    
+              // Filtrar dados por nome
+              var resultados = dadosCSV.filter(function(linha) {
+                return linha[0].toLowerCase().includes(nomePesquisado); // Buscar por nome na primeira coluna
+              });
+    
+              // Hide loading indicator
+              $("#resultados").html("");
+    
+              // Exibir resultados em uma tabela
+              var resultadosHTML = "<table>";
+              resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th></tr>";
+              for (var i = 0; i < resultados.length; i++) {
+                resultadosHTML += "<tr>";
+                resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
+                resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
+                resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
+                resultadosHTML += "</tr>";
+              }
+              resultadosHTML += "</table>";
+    
+              $("#resultados").html(resultadosHTML);
             }
-  
-            // Filtrar dados por nome
-            var resultados = dadosCSV.filter(function(linha) {
-              return linha[0].toLowerCase().includes(nomePesquisado); // Buscar por nome na primeira coluna
-            });
-  
-            // Hide loading indicator
-            $("#resultados").html("");
-  
-            // Exibir resultados em uma tabela
-            var resultadosHTML = "<table>";
-            resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th></tr>";
-            for (var i = 0; i < resultados.length; i++) {
-              resultadosHTML += "<tr>";
-              resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
-              resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
-              resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
-            }
-            resultadosHTML += "</table>";
-  
-            $("#resultados").html(resultadosHTML);
-          }
-        });
+          });
+        }, 1500); // Tempo em milissegundos
       });
     });
 

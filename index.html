@@ -44,12 +44,16 @@
       border: 1px solid #ccc;
       font-size: 1rem;
       width: 70%;
+      border-radius: 5px 0 0 5px;
     }
 
     #botao-pesquisar {
       padding: 0.5rem 1rem;
-      border: 1px solid #ccc;
+      border: none;
       cursor: pointer;
+      background-color: #8dc63f; /* Cor verde clara */
+      color: white;
+      border-radius: 0 5px 5px 0;
     }
 
     #resultados {
@@ -65,6 +69,7 @@
     table td {
       border: 1px solid #ccc;
       padding: 8px;
+      cursor: pointer; /* Cursor de apontar para indicar que a coluna é clicável */
     }
 
     table th {
@@ -133,7 +138,7 @@
   
             // Exibir resultados em uma tabela
             var resultadosHTML = "<table>";
-            resultadosHTML += "<tr><th>Nome</th><th>Bairro</th><th>Abrigo</th></tr>";
+            resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th></tr>";
             for (var i = 0; i < resultados.length; i++) {
               resultadosHTML += "<tr>";
               resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
@@ -147,6 +152,30 @@
         });
       });
     });
+
+    // Função para classificar a tabela
+    function sortTable(col) {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.querySelector("table");
+      switching = true;
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("td")[col];
+          y = rows[i + 1].getElementsByTagName("td")[col];
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
   </script>
 </body>
 </html>

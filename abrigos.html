@@ -59,31 +59,25 @@
       margin: 0 auto;
     }
 
-    .nav {
-      text-align: center;
-      margin-bottom: 20px;
+    .menu {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
     }
 
-    .nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
-
-    .nav ul li a {
+    .menu a {
       text-decoration: none;
       color: #333;
-      font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 18px;
+      margin: 0 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .nav ul li a:hover {
-      color: #8dc63f;
+    .menu a:hover {
+      background-color: #8dc63f;
+      color: #fff;
     }
 
     .footer {
@@ -127,33 +121,12 @@
       border-radius: 8px;
       margin-bottom: 20px;
     }
-  /* Estilo para o menu de navegação */
-  .menu {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .menu a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    margin: 0 20px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  .menu a:hover {
-    background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
-  }
   </style>
 </head>
 <body>
 <div class="menu">
-  <a href="index.html">Pesquisa de Abrigados</a>
-  <a href="abrigos.html">Lista de Abrigos</a>
+  <a href="index.html" class="menu">Pesquisa de Abrigados</a>
+  <a href="abrigos.html" class="menu">Lista de Abrigos</a>
 </div>
 
   <div class="container">
@@ -259,4 +232,3 @@
   }
 </script>
 </body>
-</html>

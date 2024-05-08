@@ -48,17 +48,6 @@
       border-radius: 5px 5px 5px 5px;
     }
 
-    #botao-pesquisar {
-      padding: 0.5rem 1rem;
-      border: none;
-      cursor: pointer;
-      background-color: #8dc63f; /* Cor verde clara */
-      color: white;
-      border-radius: 5px 5px 5px 5px; /* Ajuste para bordas arredondadas apenas na parte inferior */
-      display: block; /* Garantir que o botão fique em uma nova linha */
-      margin-top: 10px; /* Adiciona espaço entre a caixa de texto e o botão */
-    }
-
     #resultados {
       margin-top: 2rem;
     }
@@ -101,22 +90,20 @@
       margin-top: 20px;
     }
 
-    .menu a {
+    .menu a, #botao-pesquisar {
       text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 1.2rem;
-      display: inline-block;
-      margin-right: 20px;
+      color: #fff;
+      font-size: 18px;
+      margin: 0 10px; /* Reduzindo a margem */
       padding: 10px 20px;
       border-radius: 20px;
-      background-color: #e3f5d3;
+      background-color: #8dc63f; /* Cor de fundo inicial */
       transition: background-color 0.3s, color 0.3s;
+      white-space: nowrap; /* Impede quebra de linha */
     }
 
-    .menu a:hover {
-      background-color: #8dc63f;
-      color: white;
+    .menu a:hover, #botao-pesquisar:hover {
+      background-color: #7ab32e; /* Mudança de cor ao passar o mouse */
     }
 
     @media (max-width: 768px) {

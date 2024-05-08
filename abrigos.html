@@ -141,25 +141,59 @@
         }
 
         // Criar a tabela HTML
-        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
+        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Endereço</th><th onclick='sortTable(2)'>Cidade</th></tr></thead><tbody>";
         for (var i = 0; i < abrigos.length; i++) {
-          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereco + "</td><td>" + abrigos[i].cidade + "</td></tr>";
+          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
         }
         abrigosHTML += "</tbody></table>";
         $("#abrigos").html(abrigosHTML);
-
-        // Ativar a pesquisa
-        $('#campo-pesquisa').on('keyup', function () {
-          var valorPesquisa = $(this).val().toLowerCase();
-          $('#tabela-abrigos tbody tr').filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
-          });
-        });
       })
       .catch(error => {
         console.error(error);
       });
   });
+
+  var sortDirection = {};
+
+  function sortTable(col) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.querySelector("#tabela-abrigos");
+    switching = true;
+    // Verifica se a coluna já está classificada e define o estado inicial
+    if (!sortDirection[col]) {
+      sortDirection[col] = "asc";
+    } else {
+      sortDirection[col] = sortDirection[col] === "asc" ? "desc" : "asc";
+    }
+    
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("td")[col];
+        y = rows[i + 1].getElementsByTagName("td")[col];
+        var xValue = x.innerHTML.toLowerCase();
+        var yValue = y.innerHTML.toLowerCase();
+        // Verifica a direção da classificação
+        if (sortDirection[col] === "asc") {
+          if (xValue > yValue) {
+            shouldSwitch = true;
+            break;
+          }
+        } else {
+          if (xValue < yValue) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
 </script>
 </body>
 </html>

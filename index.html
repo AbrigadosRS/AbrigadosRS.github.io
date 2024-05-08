@@ -96,6 +96,33 @@
       margin: 20px; /* Espaçamento superior */
     }
 
+    .nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    .nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .nav ul li a:hover {
+      color: #8dc63f;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 10px;
@@ -108,7 +135,7 @@
   </style>
 </head>
 <body>
-  <nav>
+  <nav class="nav">
     <ul>
       <li><a href="index.html">Pesquisa de abrigados</a></li>
       <li><a href="abrigos.html">Lista de abrigos</a></li>

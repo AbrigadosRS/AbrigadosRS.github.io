@@ -91,6 +91,32 @@
       font-size: 0.8rem;
       margin-top: 20px;
     }
+    
+    #tabela-abrigos {
+    border-collapse: collapse;
+    border: 1px solid #ccc; /* Adiciona uma borda fina em toda a tabela */
+    width: 100%;
+    }
+  
+    #tabela-abrigos th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Adiciona uma transição suave na mudança de cor */
+    }
+  
+    #tabela-abrigos th:hover {
+    background-color: #ddd; /* Muda a cor de fundo do cabeçalho ao passar o mouse */
+    }
+  
+    #tabela-abrigos td, #tabela-abrigos th {
+    border: 1px solid #ccc; /* Adiciona uma borda fina nas células do cabeçalho e do corpo */
+    padding: 8px;
+    text-align: left;
+    }
+  
+    #tabela-abrigos tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alterna as cores das linhas da tabela */
+    }
   </style>
 </head>
 <body>
@@ -143,7 +169,7 @@
         // Criar a tabela HTML
         var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Endereço</th><th onclick='sortTable(2)'>Cidade</th></tr></thead><tbody>";
         for (var i = 0; i < abrigos.length; i++) {
-          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
+          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereco + "</td><td>" + abrigos[i].cidade + "</td></tr>";
         }
         abrigosHTML += "</tbody></table>";
         $("#abrigos").html(abrigosHTML);

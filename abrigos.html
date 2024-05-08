@@ -128,26 +128,23 @@
       .then(data => {
         // Processar os dados do CSV manualmente
         var linhas = data.trim().split("\n");
-        console.log("Linhas:", linhas);
         var cabecalho = linhas[0].split(",");
-        console.log("Cabeçalho:", cabecalho);
         var abrigos = [];
 
         for (var i = 1; i < linhas.length; i++) {
           var campos = linhas[i].split(",");
-          console.log("Campos:", campos);
           var abrigo = {};
           for (var j = 0; j < campos.length; j++) {
             abrigo[cabecalho[j].trim()] = campos[j].trim();
           }
           abrigos.push(abrigo);
+          console.log("Abrigo", i, ":", abrigo); // Adiciona esse log para verificar os dados dos abrigos
         }
-        console.log("Abrigos:", abrigos);
 
         // Criar a tabela HTML
-        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Abrigo</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
+        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
         for (var i = 0; i < abrigos.length; i++) {
-          abrigosHTML += "<tr><td>" + abrigos[i].abrigo + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
+          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
         }
         abrigosHTML += "</tbody></table>";
         $("#abrigos").html(abrigosHTML);

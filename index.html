@@ -25,85 +25,45 @@
       font-weight: bold;
     }
 
-    h2 {
+    #abrigos {
+      margin-top: 2rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
       text-align: center;
-      font-size: 2rem;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
       font-weight: bold;
-      margin-top: 2rem;
+      font-size: 1.2rem;
     }
 
-    #pesquisa {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column; /* Ajuste para colocar a caixa de texto e o botão em coluna */
-      margin: 2rem;
-    }
-
-    #campo-pesquisa {
-      padding: 1rem;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      width: calc(70% - 10px); /* Ajuste para compensar a largura do botão de pesquisa */
-      border-radius: 5px 5px 5px 5px;
-    }
-
-    #botao-pesquisar {
-      padding: 0.5rem 1rem;
-      border: none;
-      cursor: pointer;
-      background-color: #8dc63f; /* Cor verde clara */
-      color: white;
-      border-radius: 5px 5px 5px 5px; /* Ajuste para bordas arredondadas apenas na parte inferior */
-      display: block; /* Garantir que o botão fique em uma nova linha */
-      margin-top: 10px; /* Adiciona espaço entre a caixa de texto e o botão */
-    }
-
-    #resultados {
-      margin-top: 2rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table th,
-    table td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      cursor: pointer; /* Cursor de apontar para indicar que a coluna é clicável */
-    }
-
-    table th {
-      background-color: #f2f2f2;
-    }
-
-    .loading-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px; /* Altura suficiente para centralizar verticalmente */
-    }
-
-    .loading {
-      text-align: center;
+    nav ul li a:hover {
+      color: #8dc63f;
     }
 
     .footer {
       text-align: center;
-      font-size: 0.8rem; /* Tamanho menor de fonte */
-      margin: 20px; /* Espaçamento superior */
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-
-      #campo-pesquisa {
-        width: 100%;
-      }
+      font-size: 0.8rem;
+      margin: 20px;
     }
   </style>
 </head>

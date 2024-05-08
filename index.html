@@ -163,7 +163,7 @@
       $("#botao-pesquisar").click(function() {
         var nomePesquisado = $("#campo-pesquisa").val().toLowerCase();
         var dadosCSV = []; // Array para armazenar os dados da planilha CSV
-  
+      $("#botao-pesquisar").addClass("menu")
         // Show loading indicator
         $("#resultados").html("<div class='loading-container'><div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div></div>");
   
@@ -207,7 +207,7 @@
         }, 900); // Tempo em milissegundos
       });
     });
-    $("#botao-pesquisar").addClass("menu");
+    
     // Função para classificar a tabela
     var sortDirection = {};
 

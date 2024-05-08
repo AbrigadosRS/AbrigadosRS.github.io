@@ -127,15 +127,34 @@
       border-radius: 8px;
       margin-bottom: 20px;
     }
+  /* Estilo para o menu de navegação */
+  .menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .menu a:hover {
+    background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
+  }
   </style>
 </head>
 <body>
-  <div class="nav">
-    <ul>
-      <li><a href="index.html">Pesquisa de abrigados</a></li>
-      <li><a href="abrigos.html">Lista de abrigos</a></li>
-    </ul>
-  </div>
+<div class="menu">
+  <a href="index.html">Pesquisa de Abrigados</a>
+  <a href="abrigos.html">Lista de Abrigos</a>
+</div>
 
   <div class="container">
     <h1>Lista de Abrigos</h1>

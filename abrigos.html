@@ -117,36 +117,48 @@
 
 <script>
   $(document).ready(function() {
-    // Carregar dados da planilha CSV de abrigos (usando Papaparse)
-    Papa.parse("data/abrigos.csv", {
-      download: true,
-      header: true,
-      delimiter: ",",
-      complete: function(results) {
-        if (results.errors.length > 0) {
-          console.error("Erro ao carregar o arquivo CSV:", results.errors);
-        } else {
-          var abrigos = results.data;
-          var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
-          for (var i = 0; i < abrigos.length; i++) {
-            abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
-          }
-          abrigosHTML += "</tbody></table>";
-          $("#abrigos").html(abrigosHTML);
-
-          // Ativar a pesquisa
-          $('#campo-pesquisa').on('keyup', function () {
-            var valorPesquisa = $(this).val().toLowerCase();
-            $('#tabela-abrigos tbody tr').filter(function () {
-              $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
-            });
-          });
+    // Carregar dados da planilha CSV de abrigos usando fetch
+    fetch("data/abrigos.csv")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao carregar o arquivo CSV");
         }
-      },
-      error: function(error) {
-        console.error("Erro ao carregar o arquivo CSV:", error);
-      }
-    });
+        return response.text();
+      })
+      .then(data => {
+        // Processar os dados do CSV manualmente
+        var linhas = data.trim().split("\n");
+        var cabecalho = linhas[0].split(",");
+        var abrigos = [];
+
+        for (var i = 1; i < linhas.length; i++) {
+          var campos = linhas[i].split(",");
+          var abrigo = {};
+          for (var j = 0; j < campos.length; j++) {
+            abrigo[cabecalho[j].trim()] = campos[j].trim();
+          }
+          abrigos.push(abrigo);
+        }
+
+        // Criar a tabela HTML
+        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
+        for (var i = 0; i < abrigos.length; i++) {
+          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
+        }
+        abrigosHTML += "</tbody></table>";
+        $("#abrigos").html(abrigosHTML);
+
+        // Ativar a pesquisa
+        $('#campo-pesquisa').on('keyup', function () {
+          var valorPesquisa = $(this).val().toLowerCase();
+          $('#tabela-abrigos tbody tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
+          });
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 </script>
 </body>

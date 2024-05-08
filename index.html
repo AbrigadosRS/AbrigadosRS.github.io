@@ -96,42 +96,31 @@
       margin: 20px; /* Espaçamento superior */
     }
 
-    .nav {
+    .menu {
       text-align: center;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
 
-    .nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
-
-    .nav ul li a {
+    .menu a {
       text-decoration: none;
       color: #333;
       font-weight: bold;
       font-size: 1.2rem;
-      display: block; /* Faz com que os links ocupem a largura total do container */
-      padding: 10px; /* Espaçamento interno dos links */
-      border-radius: 20px; /* Borda arredondada */
+      display: inline-block;
+      margin-right: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
       transition: background-color 0.3s, color 0.3s;
     }
 
-    .nav ul li a:hover {
-      background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
-      color: #fff; /* Cor do texto ao passar o mouse */
+    .menu a:hover {
+      background-color: #8dc63f;
+      color: white;
     }
 
     @media (max-width: 768px) {
-      .nav ul li {
-        display: block; /* Altera para exibição em bloco para empilhar os links verticalmente */
-        margin-bottom: 10px; /* Espaçamento entre os links */
+      .container {
+        padding: 10px;
       }
     }
   </style>

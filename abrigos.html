@@ -10,7 +10,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      background-color: #f2f2f2;
     }
 
     .container {
@@ -23,47 +23,43 @@
       text-align: center;
       font-size: 3rem;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
     #abrigos {
       margin-top: 2rem;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
-    li {
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       margin-bottom: 10px;
-    }
-
-    nav ul {
-      list-style-type: none;
-      padding: 0;
-      text-align: center;
-    }
-
-    nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    nav ul li a:hover {
-      color: #8dc63f;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .footer {
       text-align: center;
       font-size: 0.8rem;
-      margin: 20px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -78,9 +74,10 @@
   <div class="container">
     <h1>Lista de Abrigos</h1>
     
-    <div id="abrigos">
-      <!-- Aqui os abrigos serão carregados dinamicamente pelo JavaScript -->
-    </div>
+    <input type="text" id="campo-pesquisa-nome" placeholder="Pesquisar por nome...">
+    <input type="text" id="campo-pesquisa-cidade" placeholder="Pesquisar por cidade...">
+
+    <div id="abrigos"></div>
   </div>
 
   <div class="footer">
@@ -91,23 +88,33 @@
 
   <script>
     $(document).ready(function() {
-      // Atraso de 1,5 segundos antes de exibir a lista de abrigos
+      // Atraso de 1 segundo antes de carregar a tabela
       setTimeout(function() {
         // Carregar dados da planilha CSV de abrigos (usando AJAX ou outra biblioteca de requisição)
         $.ajax({
-          url: "data/abrigos.csv", // Substitua por link da sua planilha CSV
+          url: "data/abrigos.csv", // Substitua pelo caminho correto para seu arquivo CSV
           dataType: "text",
           success: function(data) {
             var abrigos = data.split("\n");
-            var abrigosHTML = "<ul>";
+            var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Bairro</th><th>Cidade</th></tr></thead><tbody>";
             for (var i = 0; i < abrigos.length; i++) {
-              abrigosHTML += "<li>" + abrigos[i] + "</li>";
+              var abrigoInfo = abrigos[i].split(",");
+              abrigosHTML += "<tr><td>" + abrigoInfo[0] + "</td><td>" + abrigoInfo[1] + "</td><td>" + abrigoInfo[2] + "</td></tr>";
             }
-            abrigosHTML += "</ul>";
+            abrigosHTML += "</tbody></table>";
             $("#abrigos").html(abrigosHTML);
+
+            // Ativar a pesquisa
+            $('#campo-pesquisa-nome, #campo-pesquisa-cidade').on('keyup', function () {
+              var nome = $('#campo-pesquisa-nome').val().toLowerCase();
+              var cidade = $('#campo-pesquisa-cidade').val().toLowerCase();
+              $('#tabela-abrigos tbody tr').filter(function () {
+                $(this).toggle($(this).find('td:nth-child(1)').text().toLowerCase().indexOf(nome) > -1 && $(this).find('td:nth-child(3)').text().toLowerCase().indexOf(cidade) > -1);
+              });
+            });
           }
         });
-      }, 1500); // Tempo em milissegundos
+      }, 1000); // Tempo em milissegundos
     });
   </script>
 </body>

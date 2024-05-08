@@ -32,6 +32,24 @@
       font-weight: bold;
       margin-top: 2rem;
     }
+    #botao-pesquisar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-right: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      display: block;
+      background-color: #e3f5d3;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #botao-pesquisar a:hover {
+      background-color: #8dc63f;
+      color: white;
+    }
 
     #pesquisa {
       display: flex;
@@ -152,7 +170,6 @@
       $("#botao-pesquisar").click(function() {
         var nomePesquisado = $("#campo-pesquisa").val().toLowerCase();
         var dadosCSV = []; // Array para armazenar os dados da planilha CSV
-      $("#botao-pesquisar").addClass("menu")
         // Show loading indicator
         $("#resultados").html("<div class='loading-container'><div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div></div>");
   

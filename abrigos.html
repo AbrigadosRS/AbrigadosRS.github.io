@@ -91,29 +91,42 @@
       font-size: 0.8rem;
       margin-top: 20px;
     }
-    
     #tabela-abrigos {
-    border-collapse: collapse;
-    border: 1px solid #ccc; /* Adiciona uma borda fina em toda a tabela */
-    width: 100%;
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #tabela-abrigos th,
+    #tabela-abrigos td {
+      padding: 12px 16px;
+      text-align: left;
     }
   
     #tabela-abrigos th {
-    background-color: #f2f2f2;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Adiciona uma transição suave na mudança de cor */
+      background-color: #f2f2f2;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
   
     #tabela-abrigos th:hover {
-    background-color: #ddd; /* Muda a cor de fundo do cabeçalho ao passar o mouse */
+      background-color: #e0e0e0;
     }
   
-    #tabela-abrigos td, #tabela-abrigos th {
-    border: 1px solid #ccc; /* Adiciona uma borda fina nas células do cabeçalho e do corpo */
-    padding: 8px;
-    text-align: left;
+    #tabela-abrigos tbody tr:nth-child(even) {
+      background-color: #f8f8f8;
     }
   
+    #campo-pesquisa {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -170,6 +183,14 @@
         }
         abrigosHTML += "</tbody></table>";
         $("#abrigos").html(abrigosHTML);
+
+        // Ativar a pesquisa
+        $('#campo-pesquisa').on('keyup', function () {
+          var valorPesquisa = $(this).val().toLowerCase();
+          $('#tabela-abrigos tbody tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
+          });
+        });
       })
       .catch(error => {
         console.error(error);

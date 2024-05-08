@@ -60,16 +60,17 @@
     }
 
     .menu {
-      display: flex;
-      justify-content: center;
+      text-align: center;
       margin-top: 20px;
     }
 
     .menu a {
       text-decoration: none;
       color: #333;
-      font-size: 18px;
-      margin: 0 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-right: 20px;
       padding: 10px 20px;
       border-radius: 20px;
       transition: background-color 0.3s, color 0.3s;
@@ -77,8 +78,12 @@
 
     .menu a:hover {
       background-color: #8dc63f;
-      color: #fff;
+      color: white;
     }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
 
     .footer {
       text-align: center;

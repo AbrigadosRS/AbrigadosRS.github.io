@@ -115,12 +115,13 @@
     cuidandodetodososgauchos@gmail.com
   </div>
 
-  <script>
+<script>
   $(document).ready(function() {
     // Carregar dados da planilha CSV de abrigos (usando Papaparse)
     Papa.parse("data/abrigos.csv", {
       download: true,
       header: true,
+      delimiter: ",",
       complete: function(results) {
         if (results.errors.length > 0) {
           console.error("Erro ao carregar o arquivo CSV:", results.errors);
@@ -141,6 +142,9 @@
             });
           });
         }
+      },
+      error: function(error) {
+        console.error("Erro ao carregar o arquivo CSV:", error);
       }
     });
   });

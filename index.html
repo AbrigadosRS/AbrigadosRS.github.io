@@ -117,42 +117,23 @@
       color: #333;
       font-weight: bold;
       font-size: 1.2rem;
+      display: block; /* Faz com que os links ocupem a largura total do container */
+      padding: 10px; /* Espaçamento interno dos links */
+      border-radius: 20px; /* Borda arredondada */
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .nav ul li a:hover {
-      color: #8dc63f;
+      background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
+      color: #fff; /* Cor do texto ao passar o mouse */
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-
-      #campo-pesquisa {
-        width: 100%;
+      .nav ul li {
+        display: block; /* Altera para exibição em bloco para empilhar os links verticalmente */
+        margin-bottom: 10px; /* Espaçamento entre os links */
       }
     }
-  /* Estilo para o menu de navegação */
-  .menu {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .menu a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    margin: 0 20px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  .menu a:hover {
-    background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
-  }
   </style>
 </head>
 <body>

@@ -132,15 +132,36 @@
         width: 100%;
       }
     }
+    <style>
+  /* Estilo para o menu de navegação */
+  .menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .menu a:hover {
+    background-color: #8dc63f; /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
+  }
+</style>
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <ul>
-      <li><a href="index.html">Pesquisa de abrigados</a></li>
-      <li><a href="abrigos.html">Lista de abrigos</a></li>
-    </ul>
-  </nav>
+<div class="menu">
+  <a href="index.html">Pesquisa de Abrigados</a>
+  <a href="abrigos.html">Lista de Abrigos</a>
+</div>
   <div class="container">
     <h1>Abrigados RS</h1>
     <h2>Procura de pessoas abrigadas</h2>

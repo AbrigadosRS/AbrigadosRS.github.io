@@ -15,7 +15,7 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 600px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -53,8 +53,37 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-bottom: 10px;
-      width: 100%;
+      width: calc(100% - 16px);
       box-sizing: border-box;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    .nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .nav ul li a:hover {
+      color: #8dc63f;
     }
 
     .footer {
@@ -65,18 +94,17 @@
   </style>
 </head>
 <body>
-  <nav>
+  <div class="nav">
     <ul>
       <li><a href="index.html">Pesquisa de abrigados</a></li>
       <li><a href="abrigos.html">Lista de abrigos</a></li>
     </ul>
-  </nav>
+  </div>
 
   <div class="container">
     <h1>Lista de Abrigos</h1>
     
-    <input type="text" id="campo-pesquisa-nome" placeholder="Pesquisar por nome...">
-    <input type="text" id="campo-pesquisa-cidade" placeholder="Pesquisar por cidade...">
+    <input type="text" id="campo-pesquisa" placeholder="Pesquisar por nome do abrigo ou cidade...">
 
     <div id="abrigos"></div>
   </div>
@@ -89,32 +117,28 @@
 
   <script>
     $(document).ready(function() {
-      // Atraso de 1 segundo antes de carregar a tabela
-      setTimeout(function() {
-        // Carregar dados da planilha CSV de abrigos (usando Papaparse)
-        Papa.parse("data/abrigos.csv", {
-          download: true,
-          header: true,
-          complete: function(results) {
-            var abrigos = results.data;
-            var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Bairro</th><th>Cidade</th></tr></thead><tbody>";
-            for (var i = 0; i < abrigos.length; i++) {
-              abrigosHTML += "<tr><td>" + abrigos[i].Nome + "</td><td>" + abrigos[i].Bairro + "</td><td>" + abrigos[i].Cidade + "</td></tr>";
-            }
-            abrigosHTML += "</tbody></table>";
-            $("#abrigos").html(abrigosHTML);
-
-            // Ativar a pesquisa
-            $('#campo-pesquisa-nome, #campo-pesquisa-cidade').on('keyup', function () {
-              var nome = $('#campo-pesquisa-nome').val().toLowerCase();
-              var cidade = $('#campo-pesquisa-cidade').val().toLowerCase();
-              $('#tabela-abrigos tbody tr').filter(function () {
-                $(this).toggle($(this).find('td:nth-child(1)').text().toLowerCase().indexOf(nome) > -1 && $(this).find('td:nth-child(3)').text().toLowerCase().indexOf(cidade) > -1);
-              });
-            });
+      // Carregar dados da planilha CSV de abrigos (usando Papaparse)
+      Papa.parse("C:\Users\thimo\Desktop\site\data", {
+        download: true,
+        header: true,
+        complete: function(results) {
+          var abrigos = results.data;
+          var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th>Nome</th><th>Endereço</th><th>Cidade</th></tr></thead><tbody>";
+          for (var i = 0; i < abrigos.length; i++) {
+            abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereço + "</td><td>" + abrigos[i].cidade + "</td></tr>";
           }
-        });
-      }, 1000); // Tempo em milissegundos
+          abrigosHTML += "</tbody></table>";
+          $("#abrigos").html(abrigosHTML);
+
+          // Ativar a pesquisa
+          $('#campo-pesquisa').on('keyup', function () {
+            var valorPesquisa = $(this).val().toLowerCase();
+            $('#tabela-abrigos tbody tr').filter(function () {
+              $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
+            });
+          });
+        }
+      });
     });
   </script>
 </body>

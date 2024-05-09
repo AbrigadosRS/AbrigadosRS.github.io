@@ -6,6 +6,6 @@ session_start();
 session_destroy();
 
 // Redireciona o usuário para a página de login
-header("Location: login.php");
+header("Location: login.html");
 exit; // Certifique-se de sair após o redirecionamento
 ?>

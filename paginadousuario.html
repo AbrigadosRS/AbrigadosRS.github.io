@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página do Usuário</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Seus Abrigos</h1>
+    <div id="abrigos">
+      <!-- Aqui serão exibidos os abrigos cadastrados pelo usuário -->
+    </div>
+    <a href="cadastroabrigos.html">Cadastrar novo abrigo</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Função para carregar os abrigos do usuário
+      function carregarAbrigosUsuario() {
+        // Aqui você fará uma requisição AJAX para obter os abrigos do usuário
+        // Supondo que você tenha um script PHP chamado get_abrigos_usuario.php para isso
+        $.ajax({
+          url: "get_abrigos_usuario.php",
+          method: "GET",
+          success: function(data) {
+            // Se a requisição for bem-sucedida, insira os abrigos na div #abrigos
+            $("#abrigos").html(data);
+          },
+          error: function(xhr, status, error) {
+            // Se houver algum erro na requisição, exiba uma mensagem de erro
+            console.error("Erro ao carregar abrigos do usuário:", status, error);
+          }
+        });
+      }
+
+      // Chamar a função para carregar os abrigos do usuário quando a página for carregada
+      carregarAbrigosUsuario();
+    });
+  </script>
+</body>
+</html>

@@ -30,10 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Usuário encontrado, verifica a senha
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
-            // Login bem-sucedido, redireciona para a página do usuário
+            // Login bem-sucedido, define a variável de sessão e redireciona para a página do usuário
+            $_SESSION['usuario_logado'] = true;
+            $_SESSION['id_usuario'] = $row['id']; // Suponha que 'id' seja o campo no banco de dados que identifica exclusivamente cada usuário
             header("Location: paginadousuario.html");
             exit();
-            // Inicie a sessão ou faça qualquer outra ação necessária após o login
         } else {
             // Senha incorreta
             header("Location: login.html?error=senha-incorreta");

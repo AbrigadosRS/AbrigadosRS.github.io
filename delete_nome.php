@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dbname = "abrigad1_";
 
         // Cria a conexão
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
 
         // Verifica se houve erro na conexão
         if ($conn->connect_error) {

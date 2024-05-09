@@ -27,15 +27,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Usuário encontrado, verifica a senha
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
-            echo "Login bem-sucedido!";
+            // Login bem-sucedido, redireciona para a página do usuário
             header("Location: paginadousuario.html");
             exit();
             // Inicie a sessão ou faça qualquer outra ação necessária após o login
         } else {
-            echo "Senha incorreta!";
+            // Senha incorreta
+            header("Location: login.html?error=senha-incorreta");
+            exit();
         }
     } else {
-        echo "Nome de usuário não encontrado!";
+        // Nome de usuário não encontrado
+        header("Location: login.html?error=usuario-nao-encontrado");
+        exit();
     }
 }
 

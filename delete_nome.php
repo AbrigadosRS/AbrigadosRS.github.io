@@ -2,7 +2,7 @@
 // Verifica se o método de requisição é POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se o parâmetro "nome" foi enviado via POST
-    if (isset($_POST["nome"])) {
+    if (isset($_POST["id"])) {
         // Conexão com o banco de dados
         $servername = "localhost:3306";
         $username = "abrigad";
@@ -17,22 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Conexão falhou: " . $conn->connect_error);
         }
 
-        // Prepara e executa a consulta SQL para remover o nome da tabela
-        $nome = $_POST["nome"];
-        $sql = "DELETE FROM abrigados WHERE nome = '$nome'";
+        // Prepara e executa a consulta SQL para remover o registro da tabela
+        $id = $_POST["id"];
+        $sql = "DELETE FROM abrigados WHERE id = $id";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Nome removido com sucesso!";
+            echo "Registro removido com sucesso!";
         } else {
-            echo "Erro ao remover nome: " . $conn->error;
+            echo "Erro ao remover registro: " . $conn->error;
         }
 
         // Fecha a conexão com o banco de dados
         $conn->close();
     } else {
-        echo "Parâmetro 'nome' não foi enviado.";
+        echo "Parâmetro 'id' não foi enviado.";
     }
 } else {
-    echo "Acesso negadosss.";
+    echo "Acesso negado.";
 }
 ?>

@@ -27,7 +27,7 @@ if ($conn->connect_error) {
 
 // Consulta para selecionar os abrigos do usuário atualmente logado
 $id_usuario = $_SESSION['id_usuario']; // Suponha que você tenha armazenado o ID do usuário na sessão
-$sql = "SELECT * FROM abrigos_animais WHERE id_usuario = $id_usuario";
+$sql = "SELECT * FROM abrigos_animais WHERE usuario_id = $id_usuario";
 
 // Execute a consulta
 $result = $conn->query($sql);

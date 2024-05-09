@@ -2,13 +2,6 @@
 
 session_start();
 
-// Verifica se o usuário está autenticado
-if (!isset($_SESSION['id_usuario'])) {
-    // Se não estiver autenticado, redirecione para a página de login
-    header("Location: login.html");
-    exit();
-}
-
 // Configurações do banco de dados
 $servername = "localhost:3306";
 $username = "abrigopet";
@@ -31,16 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telefone = mysqli_real_escape_string($conn, $_POST['telefone']);
     $vagas = (int)$_POST['vagas'];
     $vagasocupadas = (int)$_POST['vagasocupadas'];
-    
-    // Obtém o ID do usuário atualmente logado
-    $id_usuario = $_SESSION['id_usuario'];
+    $usuario_id = $_SESSION['id_usuario'];
     
     // Verifica se todos os campos foram preenchidos
     if (empty($nome) || empty($endereco) || empty($telefone) || $vagas <= 0 || $vagasocupadas < 0 || $vagasocupadas > $vagas) {
         echo "Por favor, preencha todos os campos corretamente!";
     } else {
-        // Insere os dados do abrigo de animais na tabela correspondente no banco de dados, incluindo o ID do usuário
-        $sql = "INSERT INTO abrigos_animais (id_usuario, nome, endereco, telefone, vagas, vagasocupadas) VALUES ($id_usuario, '$nome', '$endereco', '$telefone', $vagas, $vagasocupadas)";
+        // Insere os dados do abrigo de animais na tabela correspondente no banco de dados
+        $sql = "INSERT INTO abrigos_animais (nome, endereco, telefone, vagas, vagasocupadas) VALUES ('$nome', '$endereco', '$telefone', $vagas, $vagasocupadas)";
         if (mysqli_query($conn, $sql)) {
             echo "Abrigo de animais cadastrado com sucesso!";
         } else {

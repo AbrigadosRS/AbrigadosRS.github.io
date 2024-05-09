@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Prepara e executa a consulta SQL para remover o nome da tabela
         $nome = $_POST["nome"];
-        $sql = "DELETE FROM nome_da_tabela WHERE nome = '$nome'";
+        $sql = "DELETE FROM abrigados WHERE nome = '$nome'";
 
         if ($conn->query($sql) === TRUE) {
             echo "Nome removido com sucesso!";

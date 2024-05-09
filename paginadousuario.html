@@ -38,7 +38,6 @@ $(document).ready(function() {
             url: "get_abrigos_usuario.php",
             method: "GET",
             success: function(data) {
-                console.log("Dados recebidos do servidor:", data); // Adiciona esta linha para depuração
                 $("#abrigos").empty();
                 if (data.abrigos && data.abrigos.length > 0) {
                     data.abrigos.forEach(function(abrigo) {
@@ -46,10 +45,10 @@ $(document).ready(function() {
                         abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
                         abrigoHTML += '<p>Endereço: ' + abrigo.endereco + '</p>'; // Verifique se o campo de endereço está presente
                         abrigoHTML += '<p>Telefone: ' + abrigo.telefone + '</p>'; // Verifique se o campo de telefone está presente
-                        abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas_disponiveis + '</span></p>';
+                        abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas + '</span></p>';
                         abrigoHTML += '<button class="btn-add-vagas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga</button>';
                         abrigoHTML += '<button class="btn-remove-vagas" data-abrigo-id="' + abrigo.id + '">Remover Vaga</button>';
-                        abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagas_ocupadas + '</span></p>';
+                        abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagasocupadas + '</span></p>';
                         abrigoHTML += '<button class="btn-add-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga Ocupada</button>';
                         abrigoHTML += '<button class="btn-remove-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Remover Vaga Ocupada</button>';
                         abrigoHTML += '</div>';

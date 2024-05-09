@@ -34,21 +34,21 @@ $sql = "SELECT * FROM abrigos_animais WHERE usuario_id = $id_usuario";
 // Execute a consulta
 $result = $conn->query($sql);
 
-// Verifique se há resultados
+// Crie um array para armazenar os abrigos
+$abrigos = array();
+
+// Popule o array com os abrigos obtidos do banco de dados
 if ($result->num_rows > 0) {
-    // Exiba os abrigos em formato HTML
     while ($row = $result->fetch_assoc()) {
-        echo "<p>Nome do Abrigo: " . $row["nome"] . "</p>";
-        echo "<p>Endereço: " . $row["endereco"] . "</p>";
-        echo "<p>Cidade: " . $row["cidade"] . "</p>";
-        echo "<p>Vagas: " . $row["vagas"] . "</p>";
-        echo "<p>Vagas Ocupadas: " . $row["vagasocupadas"] . "</p>";
-        // Adicione mais campos conforme necessário
-        echo "<hr>"; // Adicione uma linha horizontal entre os abrigos
+        $abrigos[] = $row;
     }
-} else {
-    echo "Nenhum abrigo encontrado para este usuário.";
 }
+
+// Converta o array em formato JSON
+$abrigos_json = json_encode(array("abrigos" => $abrigos));
+
+// Envie os dados JSON de volta para o JavaScript
+echo $abrigos_json;
 
 // Feche a conexão com o banco de dados
 $conn->close();

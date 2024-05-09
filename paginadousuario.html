@@ -95,10 +95,10 @@ $(document).ready(function() {
                 data.abrigos.forEach(function(abrigo) {
                     var abrigoHTML = '<div class="abrigo">';
                     abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
-                    abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas_disponiveis + '</span></p>';
+                    abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas + '</span></p>';
                     abrigoHTML += '<button class="btn-add-vagas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga</button>';
                     abrigoHTML += '<button class="btn-remove-vagas" data-abrigo-id="' + abrigo.id + '">Remover Vaga</button>';
-                    abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagas_ocupadas + '</span></p>';
+                    abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagasocupadas + '</span></p>';
                     abrigoHTML += '<button class="btn-add-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga Ocupada</button>';
                     abrigoHTML += '<button class="btn-remove-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Remover Vaga Ocupada</button>';
                     abrigoHTML += '</div>';

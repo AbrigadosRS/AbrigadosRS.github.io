@@ -123,9 +123,6 @@
       background-color: #8dc63f;
       color: white;
     }
-    .delete-icon {
-      fill: #8dc63f; /* Defina a cor diretamente na classe do ícone */
-    }
     @media (max-width: 768px) {
       .container {
         padding: 10px;
@@ -193,7 +190,7 @@
             resultadosHTML += "<td>" + abrigado.bairro + "</td>"; // Bairro
             resultadosHTML += "<td>" + abrigado.abrigo + "</td>"; // Abrigo
             resultadosHTML += "<td>" + abrigado.cidade + "</td>"; // Cidade
-            resultadosHTML += "<td><img src='data/trash.svg' class='delete-icon' style='width: 24px; height: 24px;' data-id='" + abrigado.id + "' alt='Remover'></td>";
+            resultadosHTML += "<td><img src='data/trash.svg' style='width: 24px; height: 24px;' data-id='" + abrigado.id + "' alt='Remover'></td>";
             resultadosHTML += "</tr>";
           });
           resultadosHTML += "</table>";

@@ -47,6 +47,9 @@ if ($result->num_rows > 0) {
 // Converta o array em formato JSON
 $abrigos_json = json_encode(array("abrigos" => $abrigos));
 
+// Defina o cabeçalho de resposta como JSON
+header('Content-Type: application/json');
+
 // Envie os dados JSON de volta para o JavaScript
 echo $abrigos_json;
 

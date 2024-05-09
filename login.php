@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 // Configurações do banco de dados
 $servername = "localhost:3306";
 $username = "abrigopet";

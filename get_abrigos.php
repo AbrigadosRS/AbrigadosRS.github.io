@@ -1,6 +1,6 @@
 <?php
 // Conexão com o banco de dados
-$servername = "localhost";
+$servername = "localhost:3306";
 $username = "abrigad";
 $password = "k^4l5Hg57";
 $dbname = "abrigad1_";

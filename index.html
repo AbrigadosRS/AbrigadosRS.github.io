@@ -202,12 +202,12 @@
 
           // Adiciona evento de clique para a lata de lixo
           $(".delete-icon").click(function() {
-            var nomeRemover = $(this).data("nome");
+            var idRemover = $(this).data("id");
             // Remove o nome da tabela
             $.ajax({
               url: "delete_nome.php", // Substitua pelo nome do seu script PHP para remover o nome
               type: "POST",
-              data: { nome: nomeRemover },
+              data: { id: idRemover },
               success: function(response) {
                 // Atualiza a tabela após a remoção bem-sucedida
                 $("#botao-pesquisar").click();

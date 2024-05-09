@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Abrigos - Abrigados RS</title>
@@ -104,22 +103,22 @@
       padding: 12px 16px;
       text-align: left;
     }
-  
+
     #tabela-abrigos th {
       background-color: #f2f2f2;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s;
     }
-  
+
     #tabela-abrigos th:hover {
       background-color: #e0e0e0;
     }
-  
+
     #tabela-abrigos tbody tr:nth-child(even) {
       background-color: #f8f8f8;
     }
-  
+
     #campo-pesquisa {
       width: 100%;
       padding: 10px;
@@ -137,7 +136,7 @@
 
   <div class="container">
     <h1>Lista de Abrigos</h1>
-    
+
     <input type="text" id="campo-pesquisa" placeholder="Pesquisar por nome do abrigo ou cidade...">
 
     <div id="abrigos"></div>
@@ -151,53 +150,26 @@
 
 <script>
   $(document).ready(function() {
-    // Carregar dados da planilha CSV de abrigos usando fetch
-    fetch("data/abrigos.csv")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Erro ao carregar o arquivo CSV");
+    // Carregar dados da planilha CSV de abrigos usando AJAX
+    $.ajax({
+        url: "get_abrigos.php",
+        success: function(data) {
+            $("#abrigos").html("<table id='tabela-abrigos'><thead><tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Endereço</th><th onclick='sortTable(2)'>Cidade</th></tr></thead><tbody>" + data + "</tbody></table>");
+            
+            // Ativar a pesquisa
+            $('#campo-pesquisa').on('keyup', function () {
+                var valorPesquisa = $(this).val().toLowerCase();
+                $('#tabela-abrigos tbody tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
+                });
+            });
         }
-        return response.text();
-      })
-      .then(data => {
-        // Processar os dados do CSV manualmente
-        var linhas = data.trim().split("\n");
-        var cabecalho = linhas[0].split(",");
-        var abrigos = [];
+    });
+});
 
-        for (var i = 1; i < linhas.length; i++) {
-          var campos = linhas[i].split(",");
-          var abrigo = {};
-          for (var j = 0; j < campos.length; j++) {
-            abrigo[cabecalho[j].trim()] = campos[j].trim();
-          }
-          abrigos.push(abrigo);
-        }
+var sortDirection = {};
 
-        // Criar a tabela HTML
-        var abrigosHTML = "<table id='tabela-abrigos'><thead><tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Endereço</th><th onclick='sortTable(2)'>Cidade</th></tr></thead><tbody>";
-        for (var i = 0; i < abrigos.length; i++) {
-          abrigosHTML += "<tr><td>" + abrigos[i].nome + "</td><td>" + abrigos[i].endereco + "</td><td>" + abrigos[i].cidade + "</td></tr>";
-        }
-        abrigosHTML += "</tbody></table>";
-        $("#abrigos").html(abrigosHTML);
-
-        // Ativar a pesquisa
-        $('#campo-pesquisa').on('keyup', function () {
-          var valorPesquisa = $(this).val().toLowerCase();
-          $('#tabela-abrigos tbody tr').filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(valorPesquisa) > -1);
-          });
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  });
-
-  var sortDirection = {};
-
-  function sortTable(col) {
+function sortTable(col) {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.querySelector("#tabela-abrigos");
     switching = true;
@@ -207,7 +179,7 @@
     } else {
       sortDirection[col] = sortDirection[col] === "asc" ? "desc" : "asc";
     }
-    
+
     while (switching) {
       switching = false;
       rows = table.rows;

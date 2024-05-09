@@ -33,6 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Parâmetro 'nome' não foi enviado.";
     }
 } else {
-    echo "Acesso negado.";
+    echo "Acesso negadosss.";
 }
 ?>

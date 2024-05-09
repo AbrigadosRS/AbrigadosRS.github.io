@@ -83,9 +83,25 @@
           url: "atualizar_numero_vagas_ocupadas.php",
           method: "POST",
           data: { abrigo_id: abrigoId, novo_numero_vagas_ocupadas: novoNumeroVagasOcupadas },
-          success: function(response) {
-            carregarAbrigosUsuario();
-          },
+          success: function(data) {
+            $("#abrigos").empty();
+         if (data && Array.isArray(data.abrigos)) {
+             data.abrigos.forEach(function(abrigo) {
+                 var abrigoHTML = '<div class="abrigo">';
+                 abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
+                 abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas_disponiveis + '</span></p>';
+                  abrigoHTML += '<button class="btn-add-vagas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga</button>';
+                  abrigoHTML += '<button class="btn-remove-vagas" data-abrigo-id="' + abrigo.id + '">Remover Vaga</button>';
+                    abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagas_ocupadas + '</span></p>';
+                    abrigoHTML += '<button class="btn-add-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga Ocupada</button>';
+                    abrigoHTML += '<button class="btn-remove-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Remover Vaga Ocupada</button>';
+                 abrigoHTML += '</div>';
+            $("#abrigos").append(abrigoHTML);
+        });
+    } else {
+        console.error("Erro: Nenhum abrigo encontrado ou formato de dados inválido.");
+    }
+},
           error: function(xhr, status, error) {
             console.error("Erro ao atualizar número de vagas ocupadas:", status, error);
           }

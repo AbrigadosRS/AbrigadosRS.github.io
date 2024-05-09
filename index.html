@@ -159,57 +159,49 @@
           $("#botao-pesquisar").click(); // Trigger search button click
         }
       });
-  
+    
       $("#botao-pesquisar").click(function() {
         var nomePesquisado = $("#campo-pesquisa").val().toLowerCase();
-        var dadosCSV = []; // Array para armazenar os dados da planilha CSV
+    
         // Show loading indicator
         $("#resultados").html("<div class='loading-container'><div class='loading'><img src='data/loading.gif' alt='Carregando...' /></div></div>");
-  
-        // Atraso de 1,5 segundos antes de exibir a tabela
-        setTimeout(function() {
-          // Carregar dados da planilha CSV (usando AJAX ou outra biblioteca de requisição)
-          $.ajax({
-            url: "data/abrigados.csv", // Substitua por link da sua planilha CSV
-            dataType: "text",
-            success: function(data) {
-              var linhas = data.split("\n");
-              for (var i = 1; i < linhas.length; i++) {
-                var dadosLinha = linhas[i].split(","); // Separar dados por vírgula
-                dadosCSV.push(dadosLinha);
-              }
     
-              // Filtrar dados por nome
-              var resultados = dadosCSV.filter(function(linha) {
-                return linha[0].toLowerCase().includes(nomePesquisado); // Buscar por nome na primeira coluna
-              });
+        // Make AJAX request to PHP script
+        $.ajax({
+          url: "get_abrigados.php", // Substitua pelo nome do seu arquivo PHP
+          type: "POST",
+          data: { nome: nomePesquisado },
+          dataType: "json",
+          success: function(data) {
+            // Hide loading indicator
+            $("#resultados").html("");
     
-              // Hide loading indicator
-              $("#resultados").html("");
+            // Display results in a table
+            var resultadosHTML = "<table>";
+            resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th><th onclick='sortTable(3)'>Cidade</th></tr>";
+            data.forEach(function(abrigado) {
+              resultadosHTML += "<tr>";
+              resultadosHTML += "<td>" + abrigado.nome + "</td>"; // Nome da pessoa
+              resultadosHTML += "<td>" + abrigado.bairro + "</td>"; // Bairro
+              resultadosHTML += "<td>" + abrigado.abrigo + "</td>"; // Abrigo
+              resultadosHTML += "<td>" + abrigado.cidade + "</td>"; // Cidade
+              resultadosHTML += "</tr>";
+            });
+            resultadosHTML += "</table>";
     
-              // Exibir resultados em uma tabela
-              var resultadosHTML = "<table>";
-              resultadosHTML += "<tr><th onclick='sortTable(0)'>Nome</th><th onclick='sortTable(1)'>Bairro</th><th onclick='sortTable(2)'>Abrigo</th><th onclick='sortTable(3)'>Cidade</th></tr>";
-              for (var i = 0; i < resultados.length; i++) {
-                resultadosHTML += "<tr>";
-                resultadosHTML += "<td>" + resultados[i][0] + "</td>"; // Nome da pessoa
-                resultadosHTML += "<td>" + resultados[i][1] + "</td>"; // Bairro
-                resultadosHTML += "<td>" + resultados[i][2] + "</td>"; // Abrigo
-                resultadosHTML += "<td>" + resultados[i][3] + "</td>"; // Cidade
-                resultadosHTML += "</tr>";
-              }
-              resultadosHTML += "</table>";
-    
-              $("#resultados").html(resultadosHTML);
-            }
-          });
-        }, 900); // Tempo em milissegundos
+            $("#resultados").html(resultadosHTML);
+          },
+          error: function(xhr, status, error) {
+            console.error("Erro ao buscar dados: " + error);
+            $("#resultados").html("<div class='error'>Erro ao buscar dados. Por favor, tente novamente mais tarde.</div>");
+          }
+        });
       });
     });
-    
+    $("#botao-pesquisar").addClass("menu");
     // Função para classificar a tabela
     var sortDirection = {};
-
+    
     function sortTable(col) {
       var table, rows, switching, i, x, y, shouldSwitch;
       table = document.querySelector("table");
@@ -249,6 +241,6 @@
         }
       }
     }
-  </script>
+    </script>
 </body>
 </html>

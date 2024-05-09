@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Prepara e executa a consulta SQL para remover o registro da tabela
         $id = $_POST["id"];
+        $id = mysqli_real_escape_string($conn, $_POST["id"]);
         $sql = "DELETE FROM abrigados WHERE id = $id";
 
         if ($conn->query($sql) === TRUE) {

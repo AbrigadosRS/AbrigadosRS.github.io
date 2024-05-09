@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página do Usuário</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Estilo para o link de logout */
+    #logout-link {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      background-color: #333;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -13,6 +26,8 @@
       <!-- Aqui serão exibidos os abrigos cadastrados pelo usuário -->
     </div>
     <a href="cadastroabrigos.html">Cadastrar novo abrigo</a>
+    <!-- Link para logout -->
+    <a id="logout-link" href="logout.php">Logout</a>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

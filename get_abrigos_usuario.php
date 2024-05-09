@@ -25,8 +25,10 @@ if ($conn->connect_error) {
     die("Erro de conexão com o banco de dados: " . $conn->connect_error);
 }
 
+// Obtém o ID do usuário atualmente logado da sessão
+$id_usuario = $_SESSION['id_usuario'];
+
 // Consulta para selecionar os abrigos do usuário atualmente logado
-$id_usuario = $_SESSION['id_usuario']; // Suponha que você tenha armazenado o ID do usuário na sessão
 $sql = "SELECT * FROM abrigos_animais WHERE usuario_id = $id_usuario";
 
 // Execute a consulta

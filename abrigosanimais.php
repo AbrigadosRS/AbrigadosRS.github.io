@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Por favor, preencha todos os campos corretamente!";
     } else {
         // Insere os dados do abrigo de animais na tabela correspondente no banco de dados
-        $sql = "INSERT INTO abrigos_animais (nome, endereco, telefone, vagas, vagasocupadas) VALUES ('$nome', '$endereco', '$telefone', $vagas, $vagasocupadas, $usuario_id)";
+        $sql = "INSERT INTO abrigos_animais (nome, endereco, telefone, vagas, vagasocupadas, usuario_id) VALUES ('$nome', '$endereco', '$telefone', $vagas, $vagasocupadas, $usuario_id)";
         if (mysqli_query($conn, $sql)) {
             echo "Abrigo de animais cadastrado com sucesso!";
         } else {

@@ -5,7 +5,7 @@ $username = "abrigad";
 $password = "k^4l5Hg57";
 $dbname = "abrigad1_";
 
-$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 $conn->set_charset("utf8");
 // Verifica a conexão
 if (!$conn) {

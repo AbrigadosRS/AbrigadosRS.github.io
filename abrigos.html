@@ -81,45 +81,18 @@
       color: white;
     }
 
+    .footer-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 10px;
-      }
-      .footer {
-        text-align: center;
-        font-size: 0.8rem;
-        margin-top: 20px;
-      }
-      #tabela-abrigos {
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      #tabela-abrigos th,
-      #tabela-abrigos td {
-        padding: 12px 16px;
-        text-align: left;
-      }
-      #tabela-abrigos th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      #tabela-abrigos th:hover {
-        background-color: #e0e0e0;
-      }
-      #tabela-abrigos tbody tr:nth-child(even) {
-        background-color: #f8f8f8;
-      }
-      #campo-pesquisa {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin-bottom: 20px;
       }
     }
   </style>
@@ -138,10 +111,12 @@
   <div id="abrigos"></div>
 </div>
 
-<div class="footer">
-  Os dados foram todos coletados em planilhas abertas ao público.<br>Caso queiram/necessitem que seu nome seja removido da tabela, entre em contato através do e-mail logo abaixo<br>
-  Caso você seja representante de um abrigo e queira nos ajudar, entre em contato no mesmo e-mail, ou envie sua tabela de abrigados diretamente.<br>
-  cuidandodetodososgauchos@gmail.com
+<div class="footer-container">
+  <div class="footer">
+    Os dados foram todos coletados em planilhas abertas ao público.<br>Caso queiram/necessitem que seu nome seja removido da tabela, entre em contato através do e-mail logo abaixo<br>
+    Caso você seja representante de um abrigo e queira nos ajudar, entre em contato no mesmo e-mail, ou envie sua tabela de abrigados diretamente.<br>
+    cuidandodetodososgauchos@gmail.com
+  </div>
 </div>
 
 <script>

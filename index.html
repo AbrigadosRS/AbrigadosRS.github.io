@@ -193,7 +193,7 @@
             resultadosHTML += "<td>" + abrigado.bairro + "</td>"; // Bairro
             resultadosHTML += "<td>" + abrigado.abrigo + "</td>"; // Abrigo
             resultadosHTML += "<td>" + abrigado.cidade + "</td>"; // Cidade
-            resultadosHTML += "<td><img src='data/trash.svg' class='delete-icon' data-nome='" + abrigado.nome + "' alt='Remover'></td>"; // Adiciona a imagem da lata de lixo na nova coluna
+            resultadosHTML += "<td><img src='data/trash.svg' class='delete-icon' style='width: 24px; height: 24px;'' data-nome='" + abrigado.nome + "' alt='Remover'></td>"; // Adiciona a imagem da lata de lixo na nova coluna
             resultadosHTML += "</tr>";
           });
           resultadosHTML += "</table>";
@@ -205,7 +205,7 @@
             var nomeRemover = $(this).data("nome");
             // Remove o nome da tabela
             $.ajax({
-              url: "remove_nome.php", // Substitua pelo nome do seu script PHP para remover o nome
+              url: "delete_nome.php", // Substitua pelo nome do seu script PHP para remover o nome
               type: "POST",
               data: { nome: nomeRemover },
               success: function(response) {

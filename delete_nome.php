@@ -1,8 +1,11 @@
 <?php
 // Verifica se o método de requisição é POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica se o parâmetro "nome" foi enviado via POST
+    // Verifica se o parâmetro "id" foi enviado via POST
     if (isset($_POST["id"])) {
+        $id = $_POST["id"];
+        echo "ID recebido: " . $id;
+        
         // Conexão com o banco de dados
         $servername = "localhost:3306";
         $username = "abrigad";
@@ -18,8 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Prepara e executa a consulta SQL para remover o registro da tabela
-        $id = $_POST["id"];
-        $id = mysqli_real_escape_string($conn, $_POST["id"]);
         $sql = "DELETE FROM abrigados WHERE id = $id";
 
         if ($conn->query($sql) === TRUE) {

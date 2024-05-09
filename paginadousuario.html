@@ -35,17 +35,25 @@
     $(document).ready(function() {
       // Função para carregar os abrigos do usuário
       function carregarAbrigosUsuario() {
-        // Aqui você fará uma requisição AJAX para obter os abrigos do usuário
-        // Supondo que você tenha um script PHP chamado get_abrigos_usuario.php para isso
         $.ajax({
           url: "get_abrigos_usuario.php",
           method: "GET",
           success: function(data) {
-            // Se a requisição for bem-sucedida, insira os abrigos na div #abrigos
-            $("#abrigos").html(data);
+            $("#abrigos").empty();
+            data.abrigos.forEach(function(abrigo) {
+              var abrigoHTML = '<div class="abrigo">';
+              abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
+              abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas_disponiveis + '</span></p>';
+              abrigoHTML += '<button class="btn-add-vagas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga</button>';
+              abrigoHTML += '<button class="btn-remove-vagas" data-abrigo-id="' + abrigo.id + '">Remover Vaga</button>';
+              abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagas_ocupadas + '</span></p>';
+              abrigoHTML += '<button class="btn-add-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Adicionar Vaga Ocupada</button>';
+              abrigoHTML += '<button class="btn-remove-vagas-ocupadas" data-abrigo-id="' + abrigo.id + '">Remover Vaga Ocupada</button>';
+              abrigoHTML += '</div>';
+              $("#abrigos").append(abrigoHTML);
+            });
           },
           error: function(xhr, status, error) {
-            // Se houver algum erro na requisição, exiba uma mensagem de erro
             console.error("Erro ao carregar abrigos do usuário:", status, error);
           }
         });
@@ -56,18 +64,14 @@
 
       // Função para atualizar o número de vagas
       function atualizarNumeroVagas(abrigoId, novoNumeroVagas) {
-        // Aqui você fará uma requisição AJAX para atualizar o número de vagas do abrigo com o ID fornecido
-        // Supondo que você tenha um script PHP chamado atualizar_numero_vagas.php para isso
         $.ajax({
           url: "atualizar_numero_vagas.php",
           method: "POST",
           data: { abrigo_id: abrigoId, novo_numero_vagas: novoNumeroVagas },
           success: function(response) {
-            // Se a atualização for bem-sucedida, recarrega os abrigos do usuário
             carregarAbrigosUsuario();
           },
           error: function(xhr, status, error) {
-            // Se houver algum erro na requisição, exiba uma mensagem de erro
             console.error("Erro ao atualizar número de vagas:", status, error);
           }
         });
@@ -75,18 +79,14 @@
 
       // Função para atualizar o número de vagas ocupadas
       function atualizarNumeroVagasOcupadas(abrigoId, novoNumeroVagasOcupadas) {
-        // Aqui você fará uma requisição AJAX para atualizar o número de vagas ocupadas do abrigo com o ID fornecido
-        // Supondo que você tenha um script PHP chamado atualizar_numero_vagas_ocupadas.php para isso
         $.ajax({
           url: "atualizar_numero_vagas_ocupadas.php",
           method: "POST",
           data: { abrigo_id: abrigoId, novo_numero_vagas_ocupadas: novoNumeroVagasOcupadas },
           success: function(response) {
-            // Se a atualização for bem-sucedida, recarrega os abrigos do usuário
             carregarAbrigosUsuario();
           },
           error: function(xhr, status, error) {
-            // Se houver algum erro na requisição, exiba uma mensagem de erro
             console.error("Erro ao atualizar número de vagas ocupadas:", status, error);
           }
         });

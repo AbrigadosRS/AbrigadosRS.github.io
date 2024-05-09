@@ -33,14 +33,18 @@
       margin-top: 2rem;
     }
     #botao-pesquisar {
-      padding: 0.5rem 1rem;
-      border: none;
-      cursor: pointer;
-      background-color: #e3f5d3;
-      color: #333;
-      border-radius: 20px; /* Ajuste para bordas arredondadas apenas na parte inferior */
-      display: block; /* Garantir que o botão fique em uma nova linha */
-      margin-top: 10px; /* Adiciona espaço entre a caixa de texto e o botão */
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        background-color: #e3f5d3;
+        color: #333;
+        border-radius: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    #botao-pesquisar:hover {
+        background-color: #8dc63f;
+        color: white;
     }
 
 
@@ -157,7 +161,6 @@
         if (event.which === 13) {
           event.preventDefault(); // Prevent default form submission
           $("#botao-pesquisar").click(); // Trigger search button click
-          $("#botao-pesquisar").addClass("menu");
         }
       });
     

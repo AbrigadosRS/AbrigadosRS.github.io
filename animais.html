@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 var progressBars = document.querySelectorAll(".progress-bar");
                 progressBars.forEach(function(progressBar) {
                     var ocupacao = parseFloat(progressBar.dataset.ocupacao);
-                    if (ocupacao < 30) {
+                    if (ocupacao_percentual < 30) {
                         progressBar.classList.add("progress-low");
-                    } else if (ocupacao < 70) {
+                    } else if (ocupacao_percentual < 70) {
                         progressBar.classList.add("progress-medium");
                     } else {
                         progressBar.classList.add("progress-high");
@@ -121,16 +121,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .progress-low {
         height: 20px;
+        border-radius: 10px;
         background-color: green; /* Cor para ocupação baixa */
     }
 
     .progress-medium {
         height: 20px;
+        border-radius: 10px;
         background-color: yellow; /* Cor para ocupação média */
     }
 
     .progress-high {
         height: 20px;
+        border-radius: 10px;
         background-color: red; /* Cor para ocupação alta */
     }
     </style>

@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Abrigos de Animais</h1>
-        <!-- Mantenha o cabeçalho da tabela -->
+        <!-- Tabela para o cabeçalho -->
         <table id="abrigos-table">
             <thead>
                 <tr>
@@ -20,8 +20,9 @@
                     <th>Ocupação</th>
                 </tr>
             </thead>
-            <tbody id="abrigos-list"><!-- Esta parte será preenchida pelo PHP --></tbody>
         </table>
+        <!-- As tabelas geradas pelo PHP serão inseridas aqui -->
+        <div id="abrigos-list"></div>
     </div>
 
     <script>
@@ -45,13 +46,11 @@
     </script>
 
     <style>
-        /* Mantenha apenas as partes relacionadas à tabela */
+        /* Estilos CSS para as tabelas */
         table {
             width: 100%;
-            border-collapse: separate; /* Separando as bordas das células */
-            border-spacing: 0 10px; /* Espaçamento vertical entre as linhas */
-            border-radius: 10px; /* Arredondando as bordas da tabela */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando sombra para destacar a tabela */
+            border-collapse: collapse; /* Remove espaçamento entre as células */
+            margin-bottom: 20px; /* Adiciona espaço entre as tabelas */
         }
 
         th, td {

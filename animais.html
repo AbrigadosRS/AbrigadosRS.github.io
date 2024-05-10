@@ -43,21 +43,53 @@
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
         });
+        document.addEventListener("DOMContentLoaded", function() {
+        // Função para criar um menu suspenso ao clicar em uma coluna da tabela
+        function createDropdownMenu(columnIndex) {
+            var table = document.getElementById("abrigos-table");
+            var dropdownMenu = document.createElement("div");
+            dropdownMenu.classList.add("dropdown-menu");
+
+            // Preencher o menu suspenso com os dados da coluna
+            var rows = table.getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) { // Começa de 1 para ignorar o cabeçalho da tabela
+                var cell = rows[i].getElementsByTagName("td")[columnIndex];
+                var menuItem = document.createElement("div");
+                menuItem.textContent = cell.textContent;
+                dropdownMenu.appendChild(menuItem);
+            }
+
+            // Posicionar o menu suspenso e exibi-lo
+            dropdownMenu.style.top = table.offsetTop + "px";
+            dropdownMenu.style.left = table.offsetLeft + (columnIndex * 20) + "px"; // Ajuste o valor conforme necessário
+            document.body.appendChild(dropdownMenu);
+        }
+
+        // Adicionar evento de clique a todas as células do cabeçalho da tabela
+        var headers = document.querySelectorAll("#abrigos-table th");
+        headers.forEach(function(header, index) {
+            header.addEventListener("click", function() {
+                createDropdownMenu(index);
+            });
+        });
+    });
     </script>
 
     <style>
         /* Estilos CSS para as tabelas */
         table {
             width: 100%;
-            border-collapse: collapse; /* Remove espaçamento entre as células */
-            margin-bottom: 20px; /* Adiciona espaço entre as tabelas */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 10px; /* Arredondar as bordas das tabelas */
         }
 
         th, td {
             border: 1px solid #dddddd;
             padding: 8px;
             text-align: left;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 20%; /* Define todas as colunas com o mesmo tamanho */
         }
 
         th {

@@ -1,12 +1,13 @@
 <?php
-// Conexão com o banco de dados (substitua com suas credenciais)
-$servername = "localhost";
-$username = "seu_usuario";
-$password = "sua_senha";
-$dbname = "seu_banco_de_dados";
 
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+$servername = "localhost:3306";
+$username = "abrigopet";
+$password = "o~m6r57P4";
+$dbname = "sistema_abrigo_animais";
+
+// Conecta ao banco de dados
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn->set_charset("utf8");
 
 // Verificando a conexão
 if ($conn->connect_error) {

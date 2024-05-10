@@ -1,10 +1,5 @@
 <?php
-// Configurações do banco de dados
-require_once 'config/config.php';
 
-// Conecta ao banco de dados
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-$conn->set_charset("utf8");
 
 // Verifique se os dados foram enviados via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["abrigo_id"])) {
@@ -16,18 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["abrigo_id"])) {
     $necessidade_alimentos = $_POST["necessidade_alimentos"];
     $outros = $_POST["outros"];
 
-    // Conecte-se ao banco de dados (substitua com suas credenciais)
-    $servername = "seu_servidor";
-    $username = "seu_usuario";
-    $password = "sua_senha";
-    $dbname = "seu_banco_de_dados";
+    // Configurações do banco de dados
+    require_once 'config/config.php';
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verifique a conexão
-    if ($conn->connect_error) {
-        die("Conexão falhou: " . $conn->connect_error);
-    }
+    // Conecta ao banco de dados
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn->set_charset("utf8");
+        // Verifique a conexão
+        if ($conn->connect_error) {
+            die("Conexão falhou: " . $conn->connect_error);
+        }
 
     // Prepare e execute a consulta SQL para inserir os dados
     $sql = "INSERT INTO dados_extra_abrigo (abrigo_id, tipo_animais, necessidade_voluntarios, necessidade_veterinario, necessidade_alimentos, outros) VALUES (?, ?, ?, ?, ?, ?)";

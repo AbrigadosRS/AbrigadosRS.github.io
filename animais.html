@@ -77,11 +77,14 @@ th, td {
     padding: 8px;
     text-align: left;
     transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
+    overflow: hidden; /* Adicionando overflow para garantir bordas arredondadas */
 }
 
-th {
-    background-color: #f2f2f2;
+tr {
+    border-radius: 10px; /* Arredondando as bordas das linhas */
+    overflow: hidden; /* Adicionando overflow para garantir bordas arredondadas */
 }
+
 
 th:first-child, td:first-child {
     width: 20%;

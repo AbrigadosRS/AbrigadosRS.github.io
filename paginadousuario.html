@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página do Usuário</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- CSS do Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Estilo para o link de logout */
     #logout-link {
@@ -93,6 +95,43 @@
 
   </div>
 
+  <!-- Modal para exibir/editar detalhes do abrigo -->
+  <div class="modal fade" id="detalhesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalhes do Abrigo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulário para edição dos detalhes -->
+          <form id="detalhesForm">
+            <!-- Campos de edição dos detalhes do abrigo -->
+            <div class="mb-3">
+              <label for="tipo_animais" class="form-label">Tipo de Animais:</label>
+              <input type="text" class="form-control" id="tipo_animais" name="tipo_animais">
+            </div>
+            <div class="mb-3">
+              <label for="necessidade_voluntarios" class="form-label">Necessidade de Voluntários:</label>
+              <select class="form-select" id="necessidade_voluntarios" name="necessidade_voluntarios">
+                <option value="Não necessita">Não necessita</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Urgente">Urgente</option>
+              </select>
+            </div>
+            <!-- Adicione os outros campos aqui -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" id="salvar_detalhes">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
 $(document).ready(function() {
@@ -116,6 +155,7 @@ $(document).ready(function() {
                         abrigoHTML += '<button class="btn-add-ocupadas" data-abrigo-id="' + abrigo.id + '">+</button>';
                         abrigoHTML += '<button class="btn-remove-ocupadas" data-abrigo-id="' + abrigo.id + '">-</button>';
                         abrigoHTML += '</p>';
+                        abrigoHTML += '<button class="btn-detalhes" data-abrigo-id="' + abrigo.id + '">Adicionar detalhes</button>';
                         abrigoHTML += '</div>';
                         $("#abrigos").append(abrigoHTML);
                     });
@@ -191,7 +231,47 @@ $(document).ready(function() {
         atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas - 1);
       }
     });
+
+    // Adicionar evento de clique para o botão de detalhes do abrigo
+    $(document).on("click", ".btn-detalhes", function() {
+      var abrigoId = $(this).data("abrigo-id");
+
+      // Exibir modal com os detalhes do abrigo e permitir edição
+      $('#detalhesModal').modal('show');
+
+      // Preencher os campos do modal com os dados do abrigo (se necessário)
+    });
+
+    // Adicionar evento de clique para o botão de salvar no modal de detalhes
+    $("#salvar_detalhes").click(function() {
+      // Obter os valores dos campos do formulário do modal
+      var tipo_animais = $("#tipo_animais").val();
+      var necessidade_voluntarios = $("#necessidade_voluntarios").val();
+      // Obter outros valores dos campos do formulário do modal aqui
+      
+      // Enviar os dados para o PHP via AJAX para salvar
+      $.ajax({
+        url: "salvar_detalhes_abrigo.php",
+        method: "POST",
+        data: {
+          abrigo_id: abrigoId,
+          tipo_animais: tipo_animais,
+          necessidade_voluntarios: necessidade_voluntarios,
+          // Outros campos aqui
+        },
+        success: function(response) {
+          // Lógica de atualização da página após salvar
+          // Fechar o modal
+          $('#detalhesModal').modal('hide');
+        },
+        error: function(xhr, status, error) {
+          console.error("Erro ao salvar detalhes do abrigo:", status, error);
+        }
+      });
+    });
 });
-</script>
+  </script>
+  <!-- JavaScript do Bootstrap 5 (Bundle) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

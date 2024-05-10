@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
         }
 
         // Output dos dados em linhas estilo botão
-        echo "<table class='abrigos-table'>";
+        echo "<table class='abrigos-table' style='border-radius: 10px;'>";
         echo "<tr>";
         echo "<td>" . $row["nome"] . "</td>";
         echo "<td>" . $row["endereco"] . "</td>";

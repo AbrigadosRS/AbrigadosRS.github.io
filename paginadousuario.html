@@ -121,6 +121,30 @@
                 <option value="Urgente">Urgente</option>
               </select>
             </div>
+            <div class="mb-3">
+              <label for="necessidade_veterinario" class="form-label">Necessidade de Veterinários:</label>
+              <select class="form-select" id="necessidade_veterinario" name="necessidade_veterinario">
+                <option value="Não necessita">Não necessita</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Urgente">Urgente</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="necessidade_alimento" class="form-label">Necessidade de Alimentos:</label>
+              <select class="form-select" id="necessidade_alimento" name="necessidade_alimento">
+                <option value="Não necessita">Não necessita</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Urgente">Urgente</option>
+              </select>
+              <div class="mb-3">
+                <label for="outros" class="form-label">Outros:</label>
+                <input type="text" class="form-control" id="outros" name="outros">
+              </div>
+            </div>
             <!-- Adicione os outros campos aqui -->
           </form>
         </div>
@@ -253,6 +277,9 @@
         // Obter os valores dos campos do formulário do modal
         var tipo_animais = $("#tipo_animais").val();
         var necessidade_voluntarios = $("#necessidade_voluntarios").val();
+        var necessidade_veterinario = $("#necessidade_veterinario").val();
+        var necessidade_alimento = $("#necessidade_alimento").val();
+        var outros = $("#outros").val();
         // Obter outros valores dos campos do formulário do modal aqui
   
         // Enviar os dados para o PHP via AJAX para salvar
@@ -263,6 +290,9 @@
             abrigo_id: abrigoId,
             tipo_animais: tipo_animais,
             necessidade_voluntarios: necessidade_voluntarios,
+            necessidade_veterinario: necessidade_veterinario,
+            necessidade_alimento: necessidade_alimento,
+            outros: outros,
             // Outros campos aqui
           },
           success: function(response) {

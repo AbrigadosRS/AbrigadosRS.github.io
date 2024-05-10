@@ -22,10 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $novo_numero_vagas = $_POST["novo_numero_vagas"];
 
     // Atualiza o número de vagas no banco de dados
-    $sql = "UPDATE abrigos SET numero_vagas = $novo_numero_vagas WHERE id = $abrigo_id";
+    $sql = "UPDATE abrigos_animais SET vagas = $novo_numero_vagas WHERE id = $abrigo_id";
 
     if (mysqli_query($conn, $sql)) {
         echo "Número de vagas atualizado com sucesso!";
+        header("Location: paginadousuario.html");
     } else {
         echo "Erro ao atualizar número de vagas: " . mysqli_error($conn);
     }

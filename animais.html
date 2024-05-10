@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Botões de Login e Registro -->
+        <div class="button-container">
+            <a href="login.html" class="button">Login</a>
+            <a href="registro.html" class="button">Registrar</a>
+        </div>
         <h1>Abrigos de Animais</h1>
         <!-- Tabela para o cabeçalho -->
         <table id="abrigos-table">
@@ -109,6 +114,25 @@ document.addEventListener("DOMContentLoaded", function() {
     .occupation-bar {
         height: 20px; /* Altura da barra de progresso */
     }
+    .button-container {
+            text-align: right; /* Alinhar os botões à direita */
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 16px; /* Ajustando o tamanho dos botões */
+            margin-left: 10px; /* Adicionando um espaço entre os botões */
+            background-color: #8dc63f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #8dc63f; /* Mesma cor do hover na tabela */
+        }
     </style>
 </body>
 </html>

@@ -3,10 +3,7 @@
 session_start();
 
 // Configurações do banco de dados
-$servername = "localhost:3306";
-$username = "abrigopet";
-$password = "o~m6r57P4";
-$dbname = "sistema_abrigo_animais";
+require_once 'config/config.php';
 
 // Conecta ao banco de dados
 $conn = mysqli_connect($servername, $username, $password, $dbname);

@@ -1,10 +1,7 @@
 <?php
 // Aqui você precisa conectar ao seu banco de dados (usando mysqli, PDO ou outra extensão)
 // Substitua os valores de conexão com os dados do seu servidor
-$servername = "localhost:3306";
-$username = "abrigopet";
-$password = "o~m6r57P4";
-$dbname = "sistema_abrigo_animais";
+require_once 'config/config.php';
 
 // Conecta-se ao banco de dados
 $conn = mysqli_connect($servername, $username, $password, $dbname);

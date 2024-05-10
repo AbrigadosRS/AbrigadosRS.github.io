@@ -134,142 +134,148 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-$(document).ready(function() {
-    function carregarAbrigosUsuario() {
+  $(document).ready(function() {
+      function carregarAbrigosUsuario() {
+          $.ajax({
+              url: "get_abrigos_usuario.php",
+              method: "GET",
+              success: function(data) {
+                  $("#abrigos").empty();
+                  if (data.abrigos && data.abrigos.length > 0) {
+                      data.abrigos.forEach(function(abrigo) {
+                          var abrigoHTML = '<div class="abrigo">';
+                          abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
+                          abrigoHTML += '<p>Endereço: ' + abrigo.endereco + '</p>'; // Verifique se o campo de endereço está presente
+                          abrigoHTML += '<p>Telefone: ' + abrigo.telefone + '</p>'; // Verifique se o campo de telefone está presente
+                          abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas + '</span>';
+                          abrigoHTML += '<button class="btn-add" data-abrigo-id="' + abrigo.id + '">+</button>';
+                          abrigoHTML += '<button class="btn-remove" data-abrigo-id="' + abrigo.id + '">-</button>';
+                          abrigoHTML += '</p>';
+                          abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagasocupadas + '</span>';
+                          abrigoHTML += '<button class="btn-add-ocupadas" data-abrigo-id="' + abrigo.id + '">+</button>';
+                          abrigoHTML += '<button class="btn-remove-ocupadas" data-abrigo-id="' + abrigo.id + '">-</button>';
+                          abrigoHTML += '</p>';
+                          abrigoHTML += '<button class="btn-detalhes" data-abrigo-id="' + abrigo.id + '">Adicionar detalhes</button>';
+                          abrigoHTML += '</div>';
+                          $("#abrigos").append(abrigoHTML);
+                      });
+                  } else {
+                      console.error("Erro: Nenhum abrigo encontrado ou formato de dados inválido.");
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error("Erro ao carregar abrigos do usuário:", status, error);
+              }
+          });
+      }
+  
+      // Chamar a função para carregar os abrigos do usuário quando a página for carregada
+      carregarAbrigosUsuario();
+  
+      // Função para atualizar o número de vagas
+      function atualizarNumeroVagas(abrigoId, novoNumeroVagas) {
         $.ajax({
-            url: "get_abrigos_usuario.php",
-            method: "GET",
-            success: function(data) {
-                $("#abrigos").empty();
-                if (data.abrigos && data.abrigos.length > 0) {
-                    data.abrigos.forEach(function(abrigo) {
-                        var abrigoHTML = '<div class="abrigo">';
-                        abrigoHTML += '<h2>' + abrigo.nome + '</h2>';
-                        abrigoHTML += '<p>Endereço: ' + abrigo.endereco + '</p>'; // Verifique se o campo de endereço está presente
-                        abrigoHTML += '<p>Telefone: ' + abrigo.telefone + '</p>'; // Verifique se o campo de telefone está presente
-                        abrigoHTML += '<p>Vagas disponíveis: <span id="vagas-' + abrigo.id + '">' + abrigo.vagas + '</span>';
-                        abrigoHTML += '<button class="btn-add" data-abrigo-id="' + abrigo.id + '">+</button>';
-                        abrigoHTML += '<button class="btn-remove" data-abrigo-id="' + abrigo.id + '">-</button>';
-                        abrigoHTML += '</p>';
-                        abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagasocupadas + '</span>';
-                        abrigoHTML += '<button class="btn-add-ocupadas" data-abrigo-id="' + abrigo.id + '">+</button>';
-                        abrigoHTML += '<button class="btn-remove-ocupadas" data-abrigo-id="' + abrigo.id + '">-</button>';
-                        abrigoHTML += '</p>';
-                        abrigoHTML += '<button class="btn-detalhes" data-abrigo-id="' + abrigo.id + '">Adicionar detalhes</button>';
-                        abrigoHTML += '</div>';
-                        $("#abrigos").append(abrigoHTML);
-                    });
-                } else {
-                    console.error("Erro: Nenhum abrigo encontrado ou formato de dados inválido.");
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro ao carregar abrigos do usuário:", status, error);
-            }
+          url: "atualizar_numero_vagas.php",
+          method: "POST",
+          data: { abrigo_id: abrigoId, novo_numero_vagas: novoNumeroVagas },
+          success: function(response) {
+            carregarAbrigosUsuario();
+          },
+          error: function(xhr, status, error) {
+            console.error("Erro ao atualizar número de vagas:", status, error);
+          }
         });
-    }
-
-    // Chamar a função para carregar os abrigos do usuário quando a página for carregada
-    carregarAbrigosUsuario();
-
-    // Função para atualizar o número de vagas
-    function atualizarNumeroVagas(abrigoId, novoNumeroVagas) {
-      $.ajax({
-        url: "atualizar_numero_vagas.php",
-        method: "POST",
-        data: { abrigo_id: abrigoId, novo_numero_vagas: novoNumeroVagas },
-        success: function(response) {
-          carregarAbrigosUsuario();
-        },
-        error: function(xhr, status, error) {
-          console.error("Erro ao atualizar número de vagas:", status, error);
-        }
-      });
-    }
-
-    // Função para atualizar o número de vagas ocupadas
-    function atualizarNumeroVagasOcupadas(abrigoId, novoNumeroVagasOcupadas) {
-      $.ajax({
-        url: "atualizar_numero_vagas_ocupadas.php",
-        method: "POST",
-        data: { abrigo_id: abrigoId, novo_numero_vagas_ocupadas: novoNumeroVagasOcupadas },
-        success: function(data) {
-          console.log("Dados recebidos:", data);
-          carregarAbrigosUsuario();
-        },
-        error: function(xhr, status, error) {
-          console.error("Erro ao atualizar número de vagas ocupadas:", status, error);
-        }
-      });
-    }
-
-    // Adicionando eventos de clique para os botões de adição e subtração
-    $(document).on("click", ".btn-add", function() {
-      var abrigoId = $(this).data("abrigo-id");
-      var numeroVagas = parseInt($("#vagas-" + abrigoId).text());
-      atualizarNumeroVagas(abrigoId, numeroVagas + 1);
-    });
-
-    $(document).on("click", ".btn-remove", function() {
-      var abrigoId = $(this).data("abrigo-id");
-      var numeroVagas = parseInt($("#vagas-" + abrigoId).text());
-      if (numeroVagas > 0) {
-        atualizarNumeroVagas(abrigoId, numeroVagas - 1);
       }
-    });
-
-    $(document).on("click", ".btn-add-ocupadas", function() {
-      var abrigoId = $(this).data("abrigo-id");
-      var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
-      atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas + 1);
-    });
-
-    $(document).on("click", ".btn-remove-ocupadas", function() {
-      var abrigoId = $(this).data("abrigo-id");
-      var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
-      if (numeroVagasOcupadas > 0) {
-        atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas - 1);
+  
+      // Função para atualizar o número de vagas ocupadas
+      function atualizarNumeroVagasOcupadas(abrigoId, novoNumeroVagasOcupadas) {
+        $.ajax({
+          url: "atualizar_numero_vagas_ocupadas.php",
+          method: "POST",
+          data: { abrigo_id: abrigoId, novo_numero_vagas_ocupadas: novoNumeroVagasOcupadas },
+          success: function(data) {
+            console.log("Dados recebidos:", data);
+            carregarAbrigosUsuario();
+          },
+          error: function(xhr, status, error) {
+            console.error("Erro ao atualizar número de vagas ocupadas:", status, error);
+          }
+        });
       }
-    });
-
-    // Adicionar evento de clique para o botão de detalhes do abrigo
-    $(document).on("click", ".btn-detalhes", function() {
-      var abrigoId = $(this).data("abrigo-id");
-
-      // Exibir modal com os detalhes do abrigo e permitir edição
-      $('#detalhesModal').modal('show');
-
-      // Preencher os campos do modal com os dados do abrigo (se necessário)
-    });
-
-    // Adicionar evento de clique para o botão de salvar no modal de detalhes
-    $("#salvar_detalhes").click(function() {
-      // Obter os valores dos campos do formulário do modal
-      var tipo_animais = $("#tipo_animais").val();
-      var necessidade_voluntarios = $("#necessidade_voluntarios").val();
-      // Obter outros valores dos campos do formulário do modal aqui
-      
-      // Enviar os dados para o PHP via AJAX para salvar
-      $.ajax({
-        url: "salvar_detalhes_abrigo.php",
-        method: "POST",
-        data: {
-          abrigo_id: abrigoId,
-          tipo_animais: tipo_animais,
-          necessidade_voluntarios: necessidade_voluntarios,
-          // Outros campos aqui
-        },
-        success: function(response) {
-          // Lógica de atualização da página após salvar
-          // Fechar o modal
-          $('#detalhesModal').modal('hide');
-        },
-        error: function(xhr, status, error) {
-          console.error("Erro ao salvar detalhes do abrigo:", status, error);
+  
+      // Adicionando eventos de clique para os botões de adição e subtração
+      $(document).on("click", ".btn-add", function() {
+        var abrigoId = $(this).data("abrigo-id");
+        var numeroVagas = parseInt($("#vagas-" + abrigoId).text());
+        atualizarNumeroVagas(abrigoId, numeroVagas + 1);
+      });
+  
+      $(document).on("click", ".btn-remove", function() {
+        var abrigoId = $(this).data("abrigo-id");
+        var numeroVagas = parseInt($("#vagas-" + abrigoId).text());
+        if (numeroVagas > 0) {
+          atualizarNumeroVagas(abrigoId, numeroVagas - 1);
         }
       });
-    });
-});
+  
+      $(document).on("click", ".btn-add-ocupadas", function() {
+        var abrigoId = $(this).data("abrigo-id");
+        var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
+        atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas + 1);
+      });
+  
+      $(document).on("click", ".btn-remove-ocupadas", function() {
+        var abrigoId = $(this).data("abrigo-id");
+        var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
+        if (numeroVagasOcupadas > 0) {
+          atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas - 1);
+        }
+      });
+  
+      // Adicionar código para abrir o modal e salvar os detalhes do abrigo
+      $(document).on("click", ".btn-detalhes", function() {
+        var abrigoId = $(this).data("abrigo-id");
+  
+        // Armazenar o ID do abrigo como um atributo de dados HTML no modal
+        $("#detalhesModal").data("abrigo-id", abrigoId);
+  
+        // Exibir modal com os detalhes do abrigo e permitir edição
+        $('#detalhesModal').modal('show');
+  
+        // Preencher os campos do modal com os dados do abrigo (se necessário)
+      });
+  
+      // Adicionar evento de clique para o botão de salvar no modal de detalhes
+      $("#salvar_detalhes").click(function() {
+        // Obter o ID do abrigo armazenado como um atributo de dados HTML no modal
+        var abrigoId = $("#detalhesModal").data("abrigo-id");
+  
+        // Obter os valores dos campos do formulário do modal
+        var tipo_animais = $("#tipo_animais").val();
+        var necessidade_voluntarios = $("#necessidade_voluntarios").val();
+        // Obter outros valores dos campos do formulário do modal aqui
+  
+        // Enviar os dados para o PHP via AJAX para salvar
+        $.ajax({
+          url: "salvar_detalhes_abrigo.php",
+          method: "POST",
+          data: {
+            abrigo_id: abrigoId,
+            tipo_animais: tipo_animais,
+            necessidade_voluntarios: necessidade_voluntarios,
+            // Outros campos aqui
+          },
+          success: function(response) {
+            // Lógica de atualização da página após salvar
+            // Fechar o modal
+            $('#detalhesModal').modal('hide');
+          },
+          error: function(xhr, status, error) {
+            console.error("Erro ao salvar detalhes do abrigo:", status, error);
+          }
+        });
+      });
+  });
   </script>
   <!-- JavaScript do Bootstrap 5 (Bundle) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

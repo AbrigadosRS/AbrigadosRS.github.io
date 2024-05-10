@@ -45,42 +45,45 @@
         });
     </script>
 
-<style>
-    /* Estilos CSS para as tabelas */
-    table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Adicionamos overflow: hidden para manter as bordas arredondadas */
-}
+    <style>
+        /* Estilos CSS para as tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Remove espaçamento entre as células */
+            margin-bottom: 20px; /* Adiciona espaço entre as tabelas */
+        }
 
-th, td {
-    border: 1px solid transparent;
-    padding: 8px;
-    text-align: left;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
-}
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
+        }
 
-th {
-    background-color: #e0e0e0;
-}
+        th {
+            background-color: #f2f2f2;
+        }
 
-tr:hover {
-    background-color: #8dc63f;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
-}
+        th:first-child, td:first-child {
+            width: 20%;
+        }
 
-table:hover {
-    border-radius: 10px; /* Mantém as bordas arredondadas ao passar o mouse */
-}
+        th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+            width: 10%;
+        }
 
-table:hover tr {
-    border-radius: 10px; /* Mantém as bordas arredondadas das linhas ao passar o mouse sobre a tabela */
-}
-</style>
+        th:last-child, td:last-child {
+            width: 20%;
+        }
+
+        tr {
+            border-radius: 10px; /* Arredondando as bordas das linhas */
+        }
+
+        tr:hover {
+            background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+        }
+    </style>
 </body>
 </html>

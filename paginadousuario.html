@@ -42,15 +42,26 @@
       justify-content: center;
       align-items: center;
     }
+    #novo-abrigo-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 5px 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <button id="novo-abrigo-btn" href="cadastroabrigos.html">Novo Abrigo</button>
     <h1>Seus Abrigos</h1>
     <div id="abrigos">
       <!-- Aqui serão exibidos os abrigos cadastrados pelo usuário -->
     </div>
-    <a href="cadastroabrigos.html">Cadastrar novo abrigo</a>
     <!-- Link para logout -->
     <a id="logout-link" href="logout.php">Logout</a>
   </div>

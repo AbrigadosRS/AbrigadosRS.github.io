@@ -16,7 +16,6 @@
                     <th>Endereço</th>
                     <th>Telefone</th>
                     <th>Vagas</th>
-                    <th>Ocupadas</th>
                     <th>Ocupação</th>
                 </tr>
             </thead>
@@ -34,6 +33,21 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var abrigosList = document.getElementById("abrigos-list");
                         abrigosList.innerHTML = xhr.responseText;
+                        
+                        // Atualizar a barra de progresso para cada abrigo
+                        var ocupacaoCells = document.querySelectorAll(".ocupacao");
+                        ocupacaoCells.forEach(function(cell) {
+                            var ocupacao = parseFloat(cell.textContent);
+                            var progressBar = cell.querySelector(".progress-bar");
+                            progressBar.style.width = ocupacao + "%";
+                            if (ocupacao <= 50) {
+                                progressBar.style.backgroundColor = "green";
+                            } else if (ocupacao <= 80) {
+                                progressBar.style.backgroundColor = "yellow";
+                            } else {
+                                progressBar.style.backgroundColor = "red";
+                            }
+                        });
                     }
                 };
                 xhr.send();
@@ -91,6 +105,11 @@
 
         th:last-child, td:last-child {
             width: 20%;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: green;
         }
     </style>
 </body>

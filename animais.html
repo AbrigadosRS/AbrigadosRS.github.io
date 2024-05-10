@@ -42,36 +42,37 @@
 
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+        // Função para criar um menu suspenso ao clicar em uma coluna da tabela
+        function createDropdownMenu(columnIndex) {
+            var table = document.getElementById("abrigos-table");
+            var dropdownMenu = document.createElement("div");
+            dropdownMenu.classList.add("dropdown-menu");
 
-            // Função para criar um menu suspenso ao clicar em uma coluna da tabela
-            function createDropdownMenu(columnIndex) {
-                var table = document.getElementById("abrigos-table");
-                var dropdownMenu = document.createElement("div");
-                dropdownMenu.classList.add("dropdown-menu");
-
-                // Preencher o menu suspenso com os dados da coluna
-                var rows = table.getElementsByTagName("tr");
-                for (var i = 1; i < rows.length; i++) { // Começa de 1 para ignorar o cabeçalho da tabela
-                    var cell = rows[i].getElementsByTagName("td")[columnIndex];
-                    var menuItem = document.createElement("div");
-                    menuItem.textContent = cell.textContent;
-                    dropdownMenu.appendChild(menuItem);
-                }
-
-                // Posicionar o menu suspenso e exibi-lo
-                dropdownMenu.style.top = table.offsetTop + "px";
-                dropdownMenu.style.left = table.offsetLeft + (columnIndex * 20) + "px"; // Ajuste o valor conforme necessário
-                document.body.appendChild(dropdownMenu);
+            // Preencher o menu suspenso com os dados da coluna
+            var rows = table.getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) { // Começa de 1 para ignorar o cabeçalho da tabela
+                var cell = rows[i].getElementsByTagName("td")[columnIndex];
+                var menuItem = document.createElement("div");
+                menuItem.textContent = cell.textContent;
+                dropdownMenu.appendChild(menuItem);
             }
 
-            // Adicionar evento de clique a todas as células do cabeçalho da tabela
-            var headers = document.querySelectorAll("#abrigos-table th");
-            headers.forEach(function(header, index) {
-                header.addEventListener("click", function() {
-                    createDropdownMenu(index);
-                });
+            // Posicionar o menu suspenso e exibi-lo
+            dropdownMenu.style.top = table.offsetTop + "px";
+            dropdownMenu.style.left = table.offsetLeft + (columnIndex * 20) + "px"; // Ajuste o valor conforme necessário
+            document.body.appendChild(dropdownMenu);
+        }
+
+        // Adicionar evento de clique a todas as células do cabeçalho da tabela
+        var headers = document.querySelectorAll("#abrigos-table th");
+        headers.forEach(function(header, index) {
+            header.addEventListener("click", function() {
+                createDropdownMenu(index);
             });
         });
+    });
     </script>
 
     <style>
@@ -91,19 +92,33 @@
             width: 20%; /* Define todas as colunas com o mesmo tamanho */
         }
 
-        /* Estilo para o menu suspenso */
-        .dropdown-menu {
-            position: absolute;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            z-index: 1000; /* Garante que o menu suspenso esteja na frente de outros elementos */
+        th {
+            background-color: #f2f2f2;
         }
 
-        .dropdown-menu div {
-            padding: 5px 0;
-            cursor: pointer;
+        th:first-child, td:first-child {
+            width: 20%;
+        }
+
+        th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+            width: 10%;
+        }
+
+        th:last-child, td:last-child {
+            width: 20%;
+        }
+
+        tr {
+            border-radius: 10px; /* Arredondando as bordas das linhas */
+        }
+
+        tr:hover {
+            background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+        }
+        .progress-bar {
+            height: 20px; /* Defina a altura da barra de progresso */
+            background-color: #ddd; /* Cor de fundo padrão */
         }
     </style>
 </body>

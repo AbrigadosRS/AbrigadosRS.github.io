@@ -30,6 +30,18 @@
       justify-content: center;
       align-items: center;
     }
+        /* Estilo para os botões de adição/remoção de vagas */
+        .btn-add-ocupadas, .btn-remove-ocupadas {
+      width: 30px;
+      height: 30px;
+      background-color: #ccc;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -128,13 +140,13 @@ $(document).ready(function() {
       }
     });
 
-    $(document).on("click", ".btn-add", function() {
+    $(document).on("click", ".btn-add-ocupadas", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas + 1);
     });
 
-    $(document).on("click", ".btn-remove", function() {
+    $(document).on("click", ".btn-remove-ocupadas", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       if (numeroVagasOcupadas > 0) {

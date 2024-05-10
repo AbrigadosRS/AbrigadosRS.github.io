@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["nome"] . "</td>";
         echo "<td>" . $row["endereco"] . "</td>";
         echo "<td>" . $row["telefone"] . "</td>";
-        echo "<td>" . $row["vagas"] . "/" . $row["vagasocupadas"] . "</td>";
+        echo "<td>" . $row["vagasocupadas"] . "/" . $row["vagas"] . "</td>";
         echo "<td>";
         echo "<div class='occupation-bar' style='background-color: $bar_color; width: " . min($ocupacao_percentual, 100) . "%'></div>";
         echo "</td>";

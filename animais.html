@@ -31,35 +31,35 @@
     </div>
 
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Função para buscar os dados dos abrigos do servidor
-    function getAbrigos() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "get_abrigos_animais.php", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var abrigosList = document.getElementById("abrigos-list");
-                abrigosList.innerHTML = xhr.responseText;
-            
+        document.addEventListener("DOMContentLoaded", function() {
+            // Função para buscar os dados dos abrigos do servidor
+            function getAbrigos() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "get_abrigos_animais.php", true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var abrigosList = document.getElementById("abrigos-list");
+                        abrigosList.innerHTML = xhr.responseText;
+                        
+                        // Adiciona evento de clique a cada linha da tabela
+                        var rows = document.querySelectorAll('.abrigo-row');
+                        rows.forEach(function(row) {
+                            row.addEventListener('click', function() {
+                                // Encontra o menu dropdown relacionado a esta linha
+                                var dropdown = this.nextElementSibling;
+                                // Alterna a visibilidade do menu dropdown
+                                dropdown.classList.toggle('show');
+                            });
+                        });
+                    }
+                };
+                xhr.send();
             }
-        };
-        xhr.send();
-    }
-        // Adiciona evento de clique a cada linha da tabela
-        var rows = document.querySelectorAll('.abrigo-row');
-        rows.forEach(function(row) {
-            row.addEventListener('click', function() {
-                // Encontra o menu dropdown relacionado a esta linha
-                var dropdown = this.nextElementSibling;
-                // Alterna a visibilidade do menu dropdown
-                dropdown.classList.toggle('show');
-            });
-        });
-    
+            
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
         });
-    </script>
+        </script>
     <style>
     /* Estilos CSS para as tabelas */
     table {

@@ -40,99 +40,133 @@ document.addEventListener("DOMContentLoaded", function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var abrigosList = document.getElementById("abrigos-list");
                 abrigosList.innerHTML = xhr.responseText;
-            
+                
+                // Adicionar evento de clique a todas as linhas da tabela
+                var rows = document.querySelectorAll("#abrigos-table tbody tr");
+                rows.forEach(function(row) {
+                    row.addEventListener("click", function() {
+                        // Criar um menu para exibir os detalhes do abrigo
+                        var detailsMenu = document.createElement("div");
+                        detailsMenu.classList.add("details-menu");
+                        
+                        // Adicionar os detalhes do abrigo ao menu
+                        row.querySelectorAll("td").forEach(function(cell, index) {
+                            var detail = document.createElement("div");
+                            detail.textContent = cell.textContent;
+                            detailsMenu.appendChild(detail);
+                        });
+                        
+                        // Posicionar o menu próximo à linha clicada
+                        detailsMenu.style.top = row.offsetTop + "px";
+                        detailsMenu.style.left = row.offsetLeft + "px";
+                        
+                        // Adicionar o menu à página
+                        document.body.appendChild(detailsMenu);
+                        
+                        // Adicionar evento para fechar o menu ao clicar fora dele
+                        document.addEventListener("click", function(event) {
+                            if (!detailsMenu.contains(event.target) && event.target !== row) {
+                                detailsMenu.parentNode.removeChild(detailsMenu);
+                            }
+                        });
+                    });
+                });
             }
         };
         xhr.send();
     }
     
-            // Chamada inicial para obter os dados dos abrigos ao carregar a página
-            getAbrigos();
-    
-            // Adicionar evento de clique a todas as linhas da tabela
-            var rows = document.querySelectorAll("#abrigos-table tbody tr");
-            rows.forEach(function(row) {
-                row.addEventListener("click", function() {
-                    // Criar um elemento para exibir o conteúdo completo
-                    var cellContent = "";
-                    row.querySelectorAll("td").forEach(function(cell) {
-                        cellContent += cell.textContent + "\n";
-                    });
-                    alert(cellContent);
-                });
-            });
-        });
-    </script>
-    <style>
-    /* Estilos CSS para as tabelas */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #f6f6f6;
-        margin-bottom: 20px;
-        border-radius: 10px; /* Arredondar as bordas das tabelas */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        overflow: hidden;
-    }
+    // Chamada inicial para obter os dados dos abrigos ao carregar a página
+    getAbrigos();
+});
+</script>
+<style>
+/* Estilos CSS para as tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f6f6f6;
+    margin-bottom: 20px;
+    border-radius: 10px; /* Arredondar as bordas das tabelas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow: hidden;
+}
 
-    th, td {
-        border: none;
-        padding: 8px;
-        text-align: center;
-        transition: background-color 0.3s, box-shadow 0.3s;
-        overflow: hidden;
-        width: calc(100% / 5)
-    }
+th, td {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    width: calc(100% / 5)
+}
 
-    th {
-        background-color: #f2f2f2;
-    }
+th {
+    background-color: #f2f2f2;
+}
 
-    th:first-child, td:first-child {
-        width: 20%;
-    }
+th:first-child, td:first-child {
+    width: 20%;
+}
 
-    th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
-        width: 10%;
-    }
+th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+    width: 10%;
+}
 
-    th:last-child, td:last-child {
-        width: 20%;
-    }
+th:last-child, td:last-child {
+    width: 20%;
+}
 
-    tr {
-        border-radius: 10px; /* Arredondando as bordas das linhas */
-        transition: background-color 0.3s, box-shadow 0.3s;
-    }
+tr {
+    border-radius: 10px; /* Arredondando as bordas das linhas */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
 
-    tr:hover {
-        border-radius: 10px;
-        background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
-        overflow: hidden;
-    }
-    .occupation-bar {
-        height: 20px; /* Altura da barra de progresso */
-    }
-    .button-container {
-            text-align: right; /* Alinhar os botões à direita */
-            margin-bottom: 20px;
-        }
+tr:hover {
+    border-radius: 10px;
+    background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+    overflow: hidden;
+}
 
-        .button {
-            display: inline-block;
-            padding: 8px 16px; /* Ajustando o tamanho dos botões */
-            margin-left: 10px; /* Adicionando um espaço entre os botões */
-            background-color: #8dc63f;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+.occupation-bar {
+    height: 20px; /* Altura da barra de progresso */
+}
 
-        .button:hover {
-            background-color: #8dc63f; /* Mesma cor do hover na tabela */
-        }
-    </style>
+.button-container {
+    text-align: right; /* Alinhar os botões à direita */
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px; /* Ajustando o tamanho dos botões */
+    margin-left: 10px; /* Adicionando um espaço entre os botões */
+    background-color: #8dc63f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #8dc63f; /* Mesma cor do hover na tabela */
+}
+
+/* Estilos CSS para o menu de detalhes */
+.details-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 999;
+}
+
+.details-menu div {
+    margin-bottom: 5px;
+}
+
+</style>
 </body>
 </html>

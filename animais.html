@@ -35,19 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var abrigosList = document.getElementById("abrigos-list");
                 abrigosList.innerHTML = xhr.responseText;
-
-                // Calcular a porcentagem de ocupação e aplicar a classe correspondente
-                var progressBars = document.querySelectorAll(".progress-bar");
-                progressBars.forEach(function(progressBar) {
-                    var ocupacao = parseFloat(progressBar.dataset.ocupacao);
-                    if (ocupacao_percentual < 30) {
-                        progressBar.classList.add("progress-low");
-                    } else if (ocupacao_percentual < 70) {
-                        progressBar.classList.add("progress-medium");
-                    } else {
-                        progressBar.classList.add("progress-high");
-                    }
-                });
+            
             }
         };
         xhr.send();
@@ -117,24 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
         background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
         overflow: hidden;
-    }
-
-    .progress-low {
-        height: 20px;
-        border-radius: 10px;
-        background-color: green; /* Cor para ocupação baixa */
-    }
-
-    .progress-medium {
-        height: 20px;
-        border-radius: 10px;
-        background-color: yellow; /* Cor para ocupação média */
-    }
-
-    .progress-high {
-        height: 20px;
-        border-radius: 10px;
-        background-color: red; /* Cor para ocupação alta */
     }
     </style>
 </body>

@@ -68,7 +68,7 @@ table {
     width: 100%;
     border-collapse: separate; /* Separando as bordas das células */
     border-spacing: 0 10px; /* Espaçamento vertical entre as linhas */
-    border-radius: 10px; /* Arredondando as bordas da tabela */
+    border-radius: 10px; /* Adicionando bordas arredondadas */
     overflow: hidden; /* Para garantir que as bordas arredondadas sejam aplicadas corretamente */
 }
 
@@ -76,7 +76,6 @@ th, td {
     border: 1px solid #dddddd;
     padding: 8px;
     text-align: left;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
 }
 
 th {
@@ -95,13 +94,8 @@ th:last-child, td:last-child {
     width: 20%;
 }
 
-tr {
-    border-radius: 10px; /* Arredondando as bordas das linhas */
-}
-
 tr:hover {
-    background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+    background-color: #e0e0e0; /* Destacando a linha ao passar o mouse */
 }
 
 .progress-bar {
@@ -120,7 +114,6 @@ tr:hover {
 .progress-bar.red {
     background-color: #ff6666; /* Vermelho */
 }
-
     </style>
 </body>
 </html>

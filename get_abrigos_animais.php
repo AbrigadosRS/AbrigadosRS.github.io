@@ -1,5 +1,4 @@
 <?php
-
 require_once 'config/config.php';
 
 // Conecta ao banco de dados
@@ -39,7 +38,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["telefone"] . "</td>";
         echo "<td>" . $row["vagas"] . "/" . $row["vagasocupadas"] . "</td>";
         echo "<td>";
-        echo "<div class='progress-bar $bar_color' style='width: " . min($ocupacao_percentual, 100) . "%'></div>";
+        echo "<div class='occupation-bar' style='background-color: $bar_color; width: " . min($ocupacao_percentual, 100) . "%'></div>";
         echo "</td>";
         echo "</tr>";
         echo "</table>";

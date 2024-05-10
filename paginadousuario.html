@@ -128,13 +128,13 @@ $(document).ready(function() {
       }
     });
 
-    $(document).on("click", ".btn-add-ocupadas", function() {
+    $(document).on("click", ".btn-add", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas + 1);
     });
 
-    $(document).on("click", ".btn-remove-ocupadas", function() {
+    $(document).on("click", ".btn-remove", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       if (numeroVagasOcupadas > 0) {

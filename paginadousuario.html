@@ -132,8 +132,8 @@
               </select>
             </div>
             <div class="mb-3">
-              <label for="necessidade_alimento" class="form-label">Necessidade de Alimentos:</label>
-              <select class="form-select" id="necessidade_alimento" name="necessidade_alimento">
+              <label for="necessidade_alimentos" class="form-label">Necessidade de Alimentos:</label>
+              <select class="form-select" id="necessidade_alimentos" name="necessidade_alimentos">
                 <option value="Não necessita">Não necessita</option>
                 <option value="Baixa">Baixa</option>
                 <option value="Média">Média</option>
@@ -278,7 +278,7 @@
         var tipo_animais = $("#tipo_animais").val();
         var necessidade_voluntarios = $("#necessidade_voluntarios").val();
         var necessidade_veterinario = $("#necessidade_veterinario").val();
-        var necessidade_alimento = $("#necessidade_alimento").val();
+        var necessidade_alimentos = $("#necessidade_alimentos").val();
         var outros = $("#outros").val();
         // Obter outros valores dos campos do formulário do modal aqui
   
@@ -291,7 +291,7 @@
             tipo_animais: tipo_animais,
             necessidade_voluntarios: necessidade_voluntarios,
             necessidade_veterinario: necessidade_veterinario,
-            necessidade_alimento: necessidade_alimento,
+            necessidade_alimentos: necessidade_alimentos,
             outros: outros,
             // Outros campos aqui
           },

@@ -63,8 +63,8 @@ $(document).ready(function() {
                         abrigoHTML += '<button class="btn-remove" data-abrigo-id="' + abrigo.id + '">-</button>';
                         abrigoHTML += '</p>';
                         abrigoHTML += '<p>Vagas ocupadas: <span id="vagas-ocupadas-' + abrigo.id + '">' + abrigo.vagasocupadas + '</span>';
-                        abrigoHTML += '<button class="btn-add" data-abrigo-id="' + abrigo.id + '">+</button>';
-                        abrigoHTML += '<button class="btn-remove" data-abrigo-id="' + abrigo.id + '">-</button>';
+                        abrigoHTML += '<button class="btn-add-ocupadas" data-abrigo-id="' + abrigo.id + '">+</button>';
+                        abrigoHTML += '<button class="btn-remove-ocupadas" data-abrigo-id="' + abrigo.id + '">-</button>';
                         abrigoHTML += '</p>';
                         abrigoHTML += '</div>';
                         $("#abrigos").append(abrigoHTML);
@@ -128,13 +128,13 @@ $(document).ready(function() {
       }
     });
 
-    $(document).on("click", ".btn-add", function() {
+    $(document).on("click", ".btn-add-ocupadas", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       atualizarNumeroVagasOcupadas(abrigoId, numeroVagasOcupadas + 1);
     });
 
-    $(document).on("click", ".btn-remove", function() {
+    $(document).on("click", ".btn-remove-ocupadas", function() {
       var abrigoId = $(this).data("abrigo-id");
       var numeroVagasOcupadas = parseInt($("#vagas-ocupadas-" + abrigoId).text());
       if (numeroVagasOcupadas > 0) {

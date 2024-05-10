@@ -44,6 +44,7 @@
     </script>
 
     <style>
+/*
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -63,7 +64,8 @@ h1 {
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+*/
+/* Mantenha apenas as partes relacionadas à tabela */
 table {
     width: 100%;
     border-collapse: separate; /* Separando as bordas das células */
@@ -77,14 +79,11 @@ th, td {
     padding: 8px;
     text-align: left;
     transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
-    overflow: hidden; /* Adicionando overflow para garantir bordas arredondadas */
 }
 
-tr {
-    border-radius: 10px; /* Arredondando as bordas das linhas */
-    overflow: hidden; /* Adicionando overflow para garantir bordas arredondadas */
+th {
+    background-color: #f2f2f2;
 }
-
 
 th:first-child, td:first-child {
     width: 20%;
@@ -106,24 +105,6 @@ tr:hover {
     background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
 }
-
-.progress-bar {
-    height: 20px;
-    transition: width 0.5s ease-in-out;
-}
-
-.progress-bar.green {
-    background-color: #70db70; /* Verde */
-}
-
-.progress-bar.yellow {
-    background-color: #ffcc00; /* Amarelo */
-}
-
-.progress-bar.red {
-    background-color: #ff6666; /* Vermelho */
-}
-
     </style>
 </body>
 </html>

@@ -26,19 +26,32 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Função para buscar os dados dos abrigos do servidor
-            function getAbrigos() {
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "get_abrigos_animais.php", true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var abrigosList = document.getElementById("abrigos-list");
-                        abrigosList.innerHTML = xhr.responseText;
+document.addEventListener("DOMContentLoaded", function() {
+    // Função para buscar os dados dos abrigos do servidor
+    function getAbrigos() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_abrigos_animais.php", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var abrigosList = document.getElementById("abrigos-list");
+                abrigosList.innerHTML = xhr.responseText;
+
+                // Calcular a porcentagem de ocupação e aplicar a classe correspondente
+                var progressBars = document.querySelectorAll(".progress-bar");
+                progressBars.forEach(function(progressBar) {
+                    var ocupacao = parseFloat(progressBar.dataset.ocupacao);
+                    if (ocupacao < 30) {
+                        progressBar.classList.add("progress-low");
+                    } else if (ocupacao < 70) {
+                        progressBar.classList.add("progress-medium");
+                    } else {
+                        progressBar.classList.add("progress-high");
                     }
-                };
-                xhr.send();
+                });
             }
+        };
+        xhr.send();
+    }
     
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
@@ -72,7 +85,7 @@
     th, td {
         border: none;
         padding: 8px;
-        text-align: left;
+        text-align: center;
         transition: background-color 0.3s, box-shadow 0.3s;
         overflow: hidden;
         width: calc(100% / 5)
@@ -106,10 +119,17 @@
         overflow: hidden;
     }
 
-        .progress-bar {
-            height: 20px; /* Defina a altura da barra de progresso */
-            background-color: #ddd; /* Cor de fundo padrão */
-        }
+    .progress-low {
+        background-color: green; /* Cor para ocupação baixa */
+    }
+
+    .progress-medium {
+        background-color: yellow; /* Cor para ocupação média */
+    }
+
+    .progress-high {
+        background-color: red; /* Cor para ocupação alta */
+    }
     </style>
 </body>
 </html>

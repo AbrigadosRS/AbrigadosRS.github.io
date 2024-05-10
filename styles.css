@@ -1,62 +1,62 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f3f3f3;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 h1 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .abrigo {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .abrigo h2 {
-  color: #333333;
-  margin-bottom: 10px;
+    color: #333333;
+    margin-bottom: 10px;
 }
 
 .abrigo p {
-  color: #666666;
-  margin-bottom: 8px;
+    color: #666666;
+    margin-bottom: 8px;
 }
 
 .progress-bar {
-  background-color: #4CAF50;
-  height: 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
+    background-color: #4CAF50;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
 }
 
 .progress-bar::after {
-  content: "";
-  display: block;
-  background-color: #ffffff;
-  height: 8px;
-  border-radius: 4px;
+    content: "";
+    display: block;
+    background-color: #ffffff;
+    height: 8px;
+    border-radius: 4px;
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-      padding: 10px;
-  }
+    .container {
+        padding: 10px;
+    }
 
-  h1 {
-      font-size: 2rem;
-  }
+    h1 {
+        font-size: 2rem;
+    }
 }

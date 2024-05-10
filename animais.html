@@ -45,45 +45,32 @@
         });
     </script>
 
-    <style>
-        /* Estilos CSS para as tabelas */
-        table {
-            width: 100%;
-            border-collapse: collapse; /* Remove espaçamento entre as células */
-            margin-bottom: 20px; /* Adiciona espaço entre as tabelas */
-        }
+        <style>
+            /* Estilos CSS para as tabelas */
+            table {
+                width: 100%;
+                border-collapse: separate; /* Alterado para separar as bordas das células */
+                border-spacing: 0; /* Adicionado para remover o espaçamento entre as células */
+                margin-bottom: 20px; /* Adiciona espaço entre as tabelas */
+                border-radius: 10px; /* Arredondando as bordas das tabelas */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adicionando sombra para destacar da página */
+            }
 
-        th, td {
-            border: 1px solid #dddddd;
-            padding: 8px;
-            text-align: left;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
-        }
+            th, td {
+                border: 1px solid transparent; /* Removendo as bordas das células */
+                padding: 8px;
+                text-align: left;
+                transition: background-color 0.3s, box-shadow 0.3s; /* Adicionando transições suaves */
+            }
 
-        th {
-            background-color: #f2f2f2;
-        }
+            th {
+                background-color: #f2f2f2;
+            }
 
-        th:first-child, td:first-child {
-            width: 20%;
-        }
-
-        th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
-            width: 10%;
-        }
-
-        th:last-child, td:last-child {
-            width: 20%;
-        }
-
-        tr {
-            border-radius: 10px; /* Arredondando as bordas das linhas */
-        }
-
-        tr:hover {
-            background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
-        }
-    </style>
+            tr:hover {
+                background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+            }
+        </style>
 </body>
 </html>

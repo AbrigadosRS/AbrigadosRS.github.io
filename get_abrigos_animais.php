@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
         }
 
         // Output dos dados em linhas estilo botão
+        echo "<table class='abrigos-table'>";
         echo "<tr>";
         echo "<td>" . $row["nome"] . "</td>";
         echo "<td>" . $row["endereco"] . "</td>";
@@ -41,9 +42,10 @@ if ($result->num_rows > 0) {
         echo "<div class='progress-bar $bar_color' style='width: " . min($ocupacao_percentual, 100) . "%'></div>";
         echo "</td>";
         echo "</tr>";
+        echo "</table>";
     }
 } else {
-    echo "<tr><td colspan='5'>Nenhum abrigo encontrado</td></tr>";
+    echo "<p>Nenhum abrigo encontrado</p>";
 }
 $conn->close();
 ?>

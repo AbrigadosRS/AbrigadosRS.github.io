@@ -44,7 +44,17 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var abrigosList = document.getElementById("abrigos-list");
                         abrigosList.innerHTML = xhr.responseText;
-                    
+                        // Adicionar evento de clique a todas as linhas da tabela
+                        var rows = document.querySelectorAll("#abrigos-table tbody tr");
+                        rows.forEach(function(row) {
+                            row.addEventListener("click", function() {
+                                // Criar e exibir o menu dropdown
+                                var dropdownMenu = document.getElementById("dropdown-menu");
+                                dropdownMenu.style.display = "block";
+                                dropdownMenu.style.top = event.clientY + "px";
+                                dropdownMenu.style.left = event.clientX + "px";
+                            });
+                        });
                     }
                 };
                 xhr.send();
@@ -52,18 +62,6 @@
             
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
-            
-            // Adicionar evento de clique a todas as linhas da tabela
-            var rows = document.querySelectorAll("#abrigos-table tbody tr");
-            rows.forEach(function(row) {
-                row.addEventListener("click", function() {
-                    // Criar e exibir o menu dropdown
-                    var dropdownMenu = document.getElementById("dropdown-menu");
-                    dropdownMenu.style.display = "block";
-                    dropdownMenu.style.top = event.clientY + "px";
-                    dropdownMenu.style.left = event.clientX + "px";
-                });
-            });
         });
     </script>
 

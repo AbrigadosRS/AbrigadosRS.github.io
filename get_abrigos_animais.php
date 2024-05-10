@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
         // Output dos dados em linhas estilo botão
         echo "<table class='abrigos-table'>";
-        echo "<tr>";
+        echo "<tr class='abrigo-row'>";
         echo "<td>" . $row["nome"] . "</td>";
         echo "<td>" . $row["endereco"] . "</td>";
         echo "<td>" . $row["telefone"] . "</td>";
@@ -40,6 +40,9 @@ if ($result->num_rows > 0) {
         echo "<td>";
         echo "<div class='occupation-bar' style='background-color: $bar_color; width: " . min($ocupacao_percentual, 100) . "%'></div>";
         echo "</td>";
+        echo "</tr>";
+        echo "<tr class='dropdown-menu'>";
+        echo "<td colspan='5'>Dropdown menu content goes here.</td>";
         echo "</tr>";
         echo "</table>";
     }

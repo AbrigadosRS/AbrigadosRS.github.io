@@ -30,95 +30,88 @@
         <div id="abrigos-list"></div>
     </div>
 
-    <div id="dropdown-menu" class="dropdown-menu">
-        <p>Função não implementada ainda</p>
-    </div>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Função para buscar os dados dos abrigos do servidor
-            function getAbrigos() {
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "get_abrigos_animais.php", true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var abrigosList = document.getElementById("abrigos-list");
-                        abrigosList.innerHTML = xhr.responseText;
-                        // Adicionar evento de clique a todas as linhas da tabela
-                        var rows = document.querySelectorAll("#abrigos-table tbody tr");
-                        rows.forEach(function(row) {
-                            row.addEventListener("click", function() {
-                                // Criar e exibir o menu dropdown
-                                var dropdownMenu = document.getElementById("dropdown-menu");
-                                dropdownMenu.style.display = "block";
-                                dropdownMenu.style.top = event.clientY + "px";
-                                dropdownMenu.style.left = event.clientX + "px";
-                            });
-                        });
-                    }
-                };
-                xhr.send();
-            }
+document.addEventListener("DOMContentLoaded", function() {
+    // Função para buscar os dados dos abrigos do servidor
+    function getAbrigos() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "get_abrigos_animais.php", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var abrigosList = document.getElementById("abrigos-list");
+                abrigosList.innerHTML = xhr.responseText;
             
+            }
+        };
+        xhr.send();
+    }
+        // Adiciona evento de clique a cada linha da tabela
+        var rows = document.querySelectorAll('.abrigo-row');
+        rows.forEach(function(row) {
+            row.addEventListener('click', function() {
+                // Encontra o menu dropdown relacionado a esta linha
+                var dropdown = this.nextElementSibling;
+                // Alterna a visibilidade do menu dropdown
+                dropdown.classList.toggle('show');
+            });
+        });
+    
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
             getAbrigos();
         });
     </script>
-
     <style>
-        /* Estilos CSS para as tabelas */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #f6f6f6;
-            margin-bottom: 20px;
-            border-radius: 10px; /* Arredondar as bordas das tabelas */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-            overflow: hidden;
-        }
+    /* Estilos CSS para as tabelas */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #f6f6f6;
+        margin-bottom: 20px;
+        border-radius: 10px; /* Arredondar as bordas das tabelas */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        overflow: hidden;
+    }
 
-        th, td {
-            border: none;
-            padding: 8px;
-            text-align: center;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            overflow: hidden;
-            width: calc(100% / 5)
-        }
+    th, td {
+        border: none;
+        padding: 8px;
+        text-align: center;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+        width: calc(100% / 5)
+    }
 
-        th {
-            background-color: #f2f2f2;
-        }
+    th {
+        background-color: #f2f2f2;
+    }
 
-        th:first-child, td:first-child {
-            width: 20%;
-        }
+    th:first-child, td:first-child {
+        width: 20%;
+    }
 
-        th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
-            width: 10%;
-        }
+    th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+        width: 10%;
+    }
 
-        th:last-child, td:last-child {
-            width: 20%;
-        }
+    th:last-child, td:last-child {
+        width: 20%;
+    }
 
-        tr {
-            border-radius: 10px; /* Arredondando as bordas das linhas */
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
+    tr {
+        border-radius: 10px; /* Arredondando as bordas das linhas */
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
 
-        tr:hover {
-            border-radius: 10px;
-            background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
-            overflow: hidden;
-        }
-
-        .occupation-bar {
-            height: 20px; /* Altura da barra de progresso */
-        }
-
-        .button-container {
+    tr:hover {
+        border-radius: 10px;
+        background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+        overflow: hidden;
+    }
+    .occupation-bar {
+        height: 20px; /* Altura da barra de progresso */
+    }
+    .button-container {
             text-align: right; /* Alinhar os botões à direita */
             margin-bottom: 20px;
         }
@@ -137,17 +130,12 @@
         .button:hover {
             background-color: #8dc63f; /* Mesma cor do hover na tabela */
         }
-
-        /* Estilos para o menu dropdown */
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            z-index: 1000; /* Garante que o menu seja exibido acima de outros elementos */
-        }
+        display: none;
+    }
+    .dropdown-menu.show {
+        display: table-row;
+    }
     </style>
 </body>
 </html>

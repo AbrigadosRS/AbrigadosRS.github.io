@@ -58,46 +58,48 @@
         });
     </script>
     <style>
-        /* Estilos CSS para as tabelas */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            border-radius: 10px; /* Arredondar as bordas das tabelas */
-        }
+    /* Estilos CSS para as tabelas */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border-radius: 10px; /* Arredondar as bordas das tabelas */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    }
 
-        th, td {
-            border: 1px solid #dddddd;
-            padding: 8px;
-            text-align: left;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            width: 20%; /* Define todas as células com o mesmo tamanho */
-        }
+    th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
 
-        th {
-            background-color: #f2f2f2;
-        }
+    th {
+        background-color: #f2f2f2;
+    }
 
-        th:first-child, td:first-child {
-            width: 20%;
-        }
+    th:first-child, td:first-child {
+        width: 20%;
+    }
 
-        th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
-            width: 10%;
-        }
+    th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) {
+        width: 10%;
+    }
 
-        th:last-child, td:last-child {
-            width: 20%;
-        }
+    th:last-child, td:last-child {
+        width: 20%;
+    }
 
-        tr {
-            border-radius: 10px; /* Arredondando as bordas das linhas */
-        }
+    tr {
+        border-radius: 10px; /* Arredondando as bordas das linhas */
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
 
-        tr:hover {
-            background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
-        }
+    tr:hover {
+        background-color: #8dc63f; /* Mudando a cor de fundo ao passar o mouse */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicionando sombreamento ao passar o mouse */
+    }
+
         .progress-bar {
             height: 20px; /* Defina a altura da barra de progresso */
             background-color: #ddd; /* Cor de fundo padrão */

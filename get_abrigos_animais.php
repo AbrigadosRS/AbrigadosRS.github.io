@@ -20,18 +20,30 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         // Calcular o nível de ocupação (em porcentagem)
         $ocupacao_percentual = ($row["vagasocupadas"] / $row["vagas"]) * 100;
-        
+
+        // Determinar a classe CSS com base na ocupação percentual
+        $bar_color = '';
+        if ($ocupacao_percentual < 70) {
+            $bar_color = 'green';
+        } elseif ($ocupacao_percentual >= 70 && $ocupacao_percentual < 90) {
+            $bar_color = 'yellow';
+        } else {
+            $bar_color = 'red';
+        }
+
+        // Output dos dados em linhas estilo botão
         echo "<tr>";
         echo "<td>" . $row["nome"] . "</td>";
         echo "<td>" . $row["endereco"] . "</td>";
         echo "<td>" . $row["telefone"] . "</td>";
         echo "<td>" . $row["vagas"] . "/" . $row["vagasocupadas"] . "</td>";
-        echo "<td><div class='progress-bar' style='width: " . $ocupacao_percentual . "%'></div></td>";
-        echo "<td>" . round($ocupacao_percentual, 2) . "%</td>";
+        echo "<td>";
+        echo "<div class='progress-bar $bar_color' style='width: " . min($ocupacao_percentual, 100) . "%'></div>";
+        echo "</td>";
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan='6'>Nenhum abrigo encontrado</td></tr>";
+    echo "<tr><td colspan='5'>Nenhum abrigo encontrado</td></tr>";
 }
 $conn->close();
 ?>

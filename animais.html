@@ -33,33 +33,9 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var abrigosList = document.getElementById("abrigos-list");
                         abrigosList.innerHTML = xhr.responseText;
-                        // Adiciona a barra de ocupação
-                        addOccupancyBars();
                     }
                 };
                 xhr.send();
-            }
-
-            // Adiciona as barras de ocupação
-            function addOccupancyBars() {
-                var abrigos = document.querySelectorAll("#abrigos-list tr");
-                abrigos.forEach(function(abrigo) {
-                    var ocupacao = parseInt(abrigo.querySelector(".ocupacao").textContent);
-                    var barra = abrigo.querySelector(".barra-ocupacao");
-                    if (ocupacao <= 100) {
-                        barra.style.width = ocupacao + "%";
-                        if (ocupacao <= 25) {
-                            barra.style.backgroundColor = "green";
-                        } else if (ocupacao <= 75) {
-                            barra.style.backgroundColor = "yellow";
-                        } else {
-                            barra.style.backgroundColor = "red";
-                        }
-                    } else {
-                        barra.style.width = "100%";
-                        barra.style.backgroundColor = "red";
-                    }
-                });
             }
 
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
@@ -116,11 +92,18 @@
             width: 20%;
         }
 
-        /* Barra de ocupação */
-        .barra-ocupacao {
-            height: 10px;
-            max-width: 100%;
-            background-color: green;
+        .progress-bar {
+            height: 20px;
+            background-color: #70db70; /* Verde */
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress-bar.yellow {
+            background-color: #ffcc00; /* Amarelo */
+        }
+
+        .progress-bar.red {
+            background-color: #ff6666; /* Vermelho */
         }
     </style>
 </body>

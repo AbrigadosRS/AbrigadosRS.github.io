@@ -8,7 +8,6 @@
   <style>
     /* Estilo para o link de logout */
     #logout-link {
-      position: absolute;
       top: 10px;
       right: 10px;
       color: #fff;
@@ -70,6 +69,7 @@
     }
 
     #novo-abrigo-btn {
+      top: 10px;
       left: 10px; /* Posicionando à esquerda */
       margin-bottom: 50px;
       color: #fff;
@@ -82,14 +82,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Seus Abrigos</h1>
     <a id="novo-abrigo-btn" href="cadastroabrigos.html">Novo Abrigo</a>
-    <br>
+    <a id="logout-link" href="logout.php">Logout</a>
+    <h1>Seus Abrigos</h1>
+    
     <div id="abrigos">
       <!-- Aqui serão exibidos os abrigos cadastrados pelo usuário -->
     </div>
     <!-- Link para logout -->
-    <a id="logout-link" href="logout.php">Logout</a>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

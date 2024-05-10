@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once 'config/config.php';
 
 // Conecta ao banco de dados
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -21,18 +21,17 @@ if ($result->num_rows > 0) {
         // Calcular o nível de ocupação (em porcentagem)
         $ocupacao_percentual = ($row["vagasocupadas"] / $row["vagas"]) * 100;
         
-        echo "<div class='abrigo'>";
-        echo "<h2>" . $row["nome"] . "</h2>";
-        echo "<p><strong>Endereço:</strong> " . $row["endereco"] . "</p>";
-        echo "<p><strong>Telefone:</strong> " . $row["telefone"] . "</p>";
-        echo "<p><strong>Vagas:</strong> " . $row["vagas"] . "</p>";
-        echo "<p><strong>Vagas Ocupadas:</strong> " . $row["vagasocupadas"] . "</p>";
-        echo "<div class='progress-bar' style='width: " . $ocupacao_percentual . "%'></div>";
-        echo "<p><strong>Nível de Ocupação:</strong> " . round($ocupacao_percentual, 2) . "%</p>";
-        echo "</div>";
+        echo "<tr>";
+        echo "<td>" . $row["nome"] . "</td>";
+        echo "<td>" . $row["endereco"] . "</td>";
+        echo "<td>" . $row["telefone"] . "</td>";
+        echo "<td>" . $row["vagas"] . "/" . $row["vagasocupadas"] . "</td>";
+        echo "<td><div class='progress-bar' style='width: " . $ocupacao_percentual . "%'></div></td>";
+        echo "<td>" . round($ocupacao_percentual, 2) . "%</td>";
+        echo "</tr>";
     }
 } else {
-    echo "0 resultados";
+    echo "<tr><td colspan='6'>Nenhum abrigo encontrado</td></tr>";
 }
 $conn->close();
 ?>

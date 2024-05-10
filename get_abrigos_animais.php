@@ -29,6 +29,7 @@ if ($result->num_rows > 0) {
         echo "<p><strong>Endereço:</strong> " . $row["endereco"] . "</p>";
         echo "<p><strong>Telefone:</strong> " . $row["telefone"] . "</p>";
         echo "<p><strong>Vagas:</strong> " . $row["vagas"] . "</p>";
+        echo "<p><strong>Vagas Ocupadas:</strong> " . $row["vagasocupadas"] . "</p>";
         echo "<div class='progress-bar' style='width: " . $ocupacao_percentual . "%'></div>";
         echo "<p><strong>Nível de Ocupação:</strong> " . round($ocupacao_percentual, 2) . "%</p>";
         echo "</div>";

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abrigos de Animais</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -34,9 +33,33 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var abrigosList = document.getElementById("abrigos-list");
                         abrigosList.innerHTML = xhr.responseText;
+                        // Adiciona a barra de ocupação
+                        addOccupancyBars();
                     }
                 };
                 xhr.send();
+            }
+
+            // Adiciona as barras de ocupação
+            function addOccupancyBars() {
+                var abrigos = document.querySelectorAll("#abrigos-list tr");
+                abrigos.forEach(function(abrigo) {
+                    var ocupacao = parseInt(abrigo.querySelector(".ocupacao").textContent);
+                    var barra = abrigo.querySelector(".barra-ocupacao");
+                    if (ocupacao <= 100) {
+                        barra.style.width = ocupacao + "%";
+                        if (ocupacao <= 25) {
+                            barra.style.backgroundColor = "green";
+                        } else if (ocupacao <= 75) {
+                            barra.style.backgroundColor = "yellow";
+                        } else {
+                            barra.style.backgroundColor = "red";
+                        }
+                    } else {
+                        barra.style.width = "100%";
+                        barra.style.backgroundColor = "red";
+                    }
+                });
             }
 
             // Chamada inicial para obter os dados dos abrigos ao carregar a página
@@ -93,35 +116,11 @@
             width: 20%;
         }
 
-        .progress-bar {
-            height: 20px;
-            background-color: #f2f2f2;
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-
-        .progress-bar-inner {
-            height: 100%;
-            background-color: #4CAF50;
-            width: 0%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: width 0.5s ease-in-out;
-        }
-
-        .low {
-            background-color: #4CAF50;
-        }
-
-        .medium {
-            background-color: #FFC107;
-        }
-
-        .high {
-            background-color: #FF5722;
+        /* Barra de ocupação */
+        .barra-ocupacao {
+            height: 10px;
+            max-width: 100%;
+            background-color: green;
         }
     </style>
 </body>

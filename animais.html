@@ -9,9 +9,27 @@
 <body>
     <div class="container">
         <h1>Abrigos de Animais</h1>
-        <div id="abrigos-list">
-            <?php include 'get_abrigos_animais.php'; ?>
-        </div>
+        <div id="abrigos-list"></div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Função para buscar os dados dos abrigos do servidor
+            function getAbrigos() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "get_abrigos_animais.php", true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var abrigosList = document.getElementById("abrigos-list");
+                        abrigosList.innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.send();
+            }
+
+            // Chamada inicial para obter os dados dos abrigos ao carregar a página
+            getAbrigos();
+        });
+    </script>
 </body>
 </html>

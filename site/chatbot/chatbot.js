@@ -1,36 +1,40 @@
-const userInput = document.getElementById('user-input');
-const sendButton = document.getElementById('send-button');
-const chatMessages = document.getElementById('chat-messages');
+document.addEventListener('DOMContentLoaded', function() {
+  const chatBox = document.getElementById('chat-box');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
 
-sendButton.addEventListener('click', async () => {
-  const message = userInput.value;
-  userInput.value = '';
+  sendBtn.addEventListener('click', function() {
+    const userMessage = userInput.value.trim();
+    if (userMessage === '') return;
 
-  // Adicionar mensagem do usuário ao chat
-  addMessage('user', message);
+    appendMessage('user', userMessage);
+    userInput.value = '';
 
-  try {
-    // Enviar mensagem para o servidor Node.js via fetch
-    const response = await fetch('/chatbot', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message })
-    });
+    sendMessage(userMessage);
+  });
 
-    const data = await response.json();
+  function appendMessage(role, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', role);
+    messageDiv.innerText = message;
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
 
-    // Adicionar resposta do bot ao chat
-    addMessage('bot', data);
-  } catch (error) {
-    console.error('Erro ao enviar mensagem:', error);
+  async function sendMessage(message) {
+    try {
+      const response = await fetch('../../chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      });
+      const data = await response.json();
+      appendMessage('model', data);
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      appendMessage('error', 'Erro ao enviar mensagem');
+    }
   }
 });
-
-function addMessage(sender, message) {
-  const messageElement = document.createElement('div');
-  messageElement.classList.add(sender);
-  messageElement.textContent = message;
-  chatMessages.appendChild(messageElement);
-}

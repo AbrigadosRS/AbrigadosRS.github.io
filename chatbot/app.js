@@ -88,7 +88,7 @@ app.post('/chatbot', async (req, res) => {
 
     if (conversationHistory.length === 1) {
       // Primeira mensagem: extrair dados do PHP e adicionar saudação inicial
-      conversationHistory[0].parts = await extractDataFromPHP();
+      //conversationHistory[0].parts = await extractDataFromPHP();
       conversationHistory.push({ 
         role: 'user', 
         parts: ["Você é um gestor de uma plataforma de abrigos de animais da enchente de 2024 no rio grande do sul. O seu Trabalho é ajudar as pessoas que acessarem o site a definir qual abrigo elas devem fornecer a sua ajuda, com base na cidade em que elas moram, na disponibilidade de recurso que elas tem e nos abrigos que apresentam maior necessidade. \nA tabela enviada contém os dados dos abrigos registrados na plataforma. Comece a conversa Perguntando o nome a cidade de quem está entrando no chat. Pergunte o que a pessoa está disposta a oferecer e com base na resposta dela, analise a tabela para definir qual abrigo ela deve ajudar primeiro.\nFaça uma pergunta de cada vez.\nVocê também pode se sentir livre para usar emojis que representem a causa animal (cães, gatos, etc)"] 

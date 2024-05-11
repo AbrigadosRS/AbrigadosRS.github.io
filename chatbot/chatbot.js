@@ -11,7 +11,7 @@ sendButton.addEventListener('click', async () => {
 
   try {
     // Enviar mensagem para o servidor Node.js via fetch
-    const response = await fetch('/api/chat', {
+    const response = await fetch('/chatbot', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

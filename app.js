@@ -24,7 +24,7 @@ const client = new v1.PredictionServiceClient({
 // *** FUNÇÕES ***
 async function extractDataFromPHP() { 
   try {
-    const response = await axios.get(`/buscardbchat.php`);
+    const response = await axios.get(`/site/chatbot/buscardbchat.php`);
     return response.data;
   } catch (error) {
     console.error('Erro ao consultar o script PHP:', error);
@@ -81,7 +81,7 @@ app.use(bodyParser.json());
 
 let conversationHistory = [];
 
-app.post('/chatbot', async (req, res) => {
+app.post('/site/chatbot', async (req, res) => {
   try {
     const userMessage = req.body.message;
     conversationHistory.push({ role: 'user', parts: [userMessage] });
@@ -102,7 +102,7 @@ app.post('/chatbot', async (req, res) => {
     const response = await sendMessage(conversationHistory);
     res.send(response);
   } catch (error) {
-    console.error('Erro na rota /chatbot:', error);
+    console.error('Erro na rota /site/chatbot:', error);
     res.status(500).send('Erro interno do servidor');
   }
 });

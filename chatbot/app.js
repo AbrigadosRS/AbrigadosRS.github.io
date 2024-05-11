@@ -6,11 +6,10 @@ const axios = require('axios');
 require('dotenv').config();
 
 // *** CARREGANDO VARIÁVEIS DE AMBIENTE ***
-dotenv.config({ path: 'config/api.env' }); // Carrega as variáveis do arquivo
 
 // *** CONFIGURAÇÃO ***
 const API_KEY = process.env.API_KEY; // Substitua 'process.env.API_KEY' pelo seu API Key.
-const PORT = process.env.PORT || 3000; // Defina a porta que o Plesk permite para o Node.js
+const PORT = process.env.PORT; // Defina a porta que o Plesk permite para o Node.js
 
 // *** GOOGLE AUTH E GEMINI ***
 const auth = new GoogleAuth({
@@ -25,7 +24,7 @@ const client = new v1.PredictionServiceClient({
 // *** FUNÇÕES ***
 async function extractDataFromPHP() { 
   try {
-    const response = await axios.get(`http://${process.env.PLESK_DOMAIN}/buscardbchat.php`);
+    const response = await axios.get(`/buscardbchat.php`);
     return response.data;
   } catch (error) {
     console.error('Erro ao consultar o script PHP:', error);
@@ -82,7 +81,7 @@ app.use(bodyParser.json());
 
 let conversationHistory = [];
 
-app.post('/api/chat', async (req, res) => {
+app.post('/chatbot', async (req, res) => {
   try {
     const userMessage = req.body.message;
     conversationHistory.push({ role: 'user', parts: [userMessage] });
@@ -103,7 +102,7 @@ app.post('/api/chat', async (req, res) => {
     const response = await sendMessage(conversationHistory);
     res.send(response);
   } catch (error) {
-    console.error('Erro na rota /api/chat:', error);
+    console.error('Erro na rota /chatbot:', error);
     res.status(500).send('Erro interno do servidor');
   }
 });

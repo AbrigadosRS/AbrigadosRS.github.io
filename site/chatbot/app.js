@@ -2,7 +2,7 @@ const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
-const port = 3000;
+const port = 3030;
 
 // Inicializa o cliente Gemini
 const genAI = new GoogleGenerativeAI("AIzaSyAADxHFaangSczoSim6KiVuFOsPytB-JV8");

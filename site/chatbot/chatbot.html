@@ -1,34 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Customize this CSS as needed */
+        #chat-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        #user-input {
+            width: calc(100% - 55px);
+            margin-right: 10px;
+        }
+        #send-button {
+            width: 50px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Chatbot</h1>
-  <div id="chat-container">
-    <div id="chat-log"></div>
-    <input type="text" id="user-input" placeholder="Digite sua mensagem...">
-    <button onclick="sendMessage()">Enviar</button>
-  </div>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div class="input-group">
+            <input type="text" id="user-input" class="form-control" placeholder="Digite sua mensagem...">
+            <button id="send-button" class="btn btn-primary">Enviar</button>
+        </div>
+    </div>
 
-  <script>
-    async function sendMessage() {
-      const userInput = document.getElementById('user-input').value;
-      document.getElementById('chat-log').innerHTML += `<div><strong>Você:</strong> ${userInput}</div>`;
-      
-      const response = await fetch('/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: userInput })
-      });
-      
-      const responseData = await response.json();
-      document.getElementById('chat-log').innerHTML += `<div><strong>Bot:</strong> ${responseData.response}</div>`;
-    }
-  </script>
+    <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Função para adicionar mensagens ao chat
+        function addMessage(sender, message, isUser) {
+            var chatMessages = document.getElementById("chat-messages");
+            var messageDiv = document.createElement("div");
+            messageDiv.className = isUser ? "text-right" : "";
+            messageDiv.innerHTML = "<strong>" + sender + ": </strong>" + message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Role para baixo para exibir a mensagem mais recente
+        }
+
+        // Evento para lidar com o clique no botão "Enviar"
+        document.getElementById("send-button").addEventListener("click", function() {
+            var userInput = document.getElementById("user-input").value;
+            if (userInput.trim() !== "") {
+                addMessage("Você", userInput, true); // Adiciona a mensagem do usuário ao chat
+                // Aqui você pode enviar a mensagem para o servidor (por exemplo, via AJAX) e obter a resposta do chatbot
+                // Por enquanto, vou apenas adicionar uma mensagem de exemplo do chatbot
+                setTimeout(function() {
+                    addMessage("Chatbot", "Olá! Como posso ajudar?", false); // Adiciona uma resposta do chatbot (exemplo)
+                }, 500);
+                document.getElementById("user-input").value = ""; // Limpa o campo de entrada
+            }
+        });
+
+        // Simule o envio de uma mensagem quando o usuário pressionar Enter
+        document.getElementById("user-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                document.getElementById("send-button").click(); // Clique no botão "Enviar"
+            }
+        });
+    </script>
 </body>
 </html>

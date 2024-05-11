@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   async function sendMessage(message) {
     try {
-      const response = await fetch('../../chatbot', {
+      const response = await fetch('/site/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -62,25 +62,34 @@
         }
 
         // Evento para lidar com o clique no botão "Enviar"
-        document.getElementById("send-button").addEventListener("click", function() {
-            var userInput = document.getElementById("user-input").value;
-            if (userInput.trim() !== "") {
-                addMessage("Você", userInput, true); // Adiciona a mensagem do usuário ao chat
-                // Aqui você pode enviar a mensagem para o servidor (por exemplo, via AJAX) e obter a resposta do chatbot
-                // Por enquanto, vou apenas adicionar uma mensagem de exemplo do chatbot
-                setTimeout(function() {
-                    addMessage("Chatbot", "Olá! Como posso ajudar?", false); // Adiciona uma resposta do chatbot (exemplo)
-                }, 500);
-                document.getElementById("user-input").value = ""; // Limpa o campo de entrada
-            }
-        });
+        document.getElementById("send-button").addEventListener("click", async function() {
+    var userInput = document.getElementById("user-input").value;
+    if (userInput.trim() !== "") {
+        addMessage("Você", userInput, true);
 
-        // Simule o envio de uma mensagem quando o usuário pressionar Enter
-        document.getElementById("user-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                document.getElementById("send-button").click(); // Clique no botão "Enviar"
+        try {
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao enviar mensagem');
             }
-        });
+
+            const responseData = await response.json();
+            addMessage("Chatbot", responseData.message, false);
+        } catch (error) {
+            console.error('Erro:', error);
+            addMessage("Chatbot", "Desculpe, ocorreu um erro ao processar sua solicitação.", false);
+        }
+
+        document.getElementById("user-input").value = "";
+    }
+});
     </script>
 </body>
 </html>

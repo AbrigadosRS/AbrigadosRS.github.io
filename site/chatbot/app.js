@@ -2,11 +2,14 @@ const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
-const port = 3030;
+const port = 3000;
 
 // Inicializa o cliente Gemini
 const genAI = new GoogleGenerativeAI("AIzaSyAADxHFaangSczoSim6KiVuFOsPytB-JV8");
 const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+
+// Middleware para analisar solicitações JSON
+app.use(express.json());
 
 // Cria uma rota de API para processar solicitações do usuário
 app.post("/chat", async (req, res) => {

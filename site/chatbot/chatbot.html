@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Chatbot Gemini</title>
-  </head>
-  <body>
-    <h1>Chatbot Gemini</h1>
-    <form id="chat-form">
-      <label for="message">Mensagem:</label>
-      <input type="text" id="message" />
-      <button type="submit">Enviar</button>
-    </form>
-    <div id="chat-history"></div>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+</head>
+<body>
+  <h1>Chatbot</h1>
+  <div id="chat-container">
+    <div id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const userInput = document.getElementById('user-input').value;
+      document.getElementById('chat-log').innerHTML += `<div><strong>Você:</strong> ${userInput}</div>`;
+      
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: userInput })
+      });
+      
+      const responseData = await response.json();
+      document.getElementById('chat-log').innerHTML += `<div><strong>Bot:</strong> ${responseData.response}</div>`;
+    }
+  </script>
+</body>
 </html>

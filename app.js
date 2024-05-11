@@ -9,7 +9,7 @@ require('dotenv').config();
 
 // *** CONFIGURAÇÃO ***
 const API_KEY = process.env.API_KEY; // Substitua 'process.env.API_KEY' pelo seu API Key.
-const PORT = process.env.PORT; // Defina a porta que o Plesk permite para o Node.js
+const PORT = process.env.PORT || 3000; // Defina a porta que o Plesk permite para o Node.js
 
 // *** GOOGLE AUTH E GEMINI ***
 const auth = new GoogleAuth({
